@@ -2,7 +2,7 @@
 /**
  * Get a collection of posts.
  *
- * @param array $data Options for the function.
+ * @param array $request Options for the function.
  * @return object|null Post object,  * or null if none.
  * @since 0.0.1
  */
