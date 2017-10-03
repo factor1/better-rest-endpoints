@@ -32,22 +32,5 @@ if ( ! defined( 'ABSPATH' ) ) {
 // get a post by id
 include_once 'inc/get_post_by_id.php';
 
-
-function get_data( WP_REST_Request $request ) {
-  $parameters = $request['id'];
-  return $parameters;
-}
-
-add_action( 'rest_api_init', function () {
-  register_rest_route( 'better-wp-endpoints/v1', '/data/', array(
-    'methods' => 'GET',
-    'callback' => 'get_data',
-    'args' => array(
-      'id' => array(
-        'validate_callback' => function($param, $request, $key) {
-          return is_numeric( $param );
-        }
-      ),
-    ),
-  ) );
-} );
+// get posts
+include_once 'inc/get_posts.php';
