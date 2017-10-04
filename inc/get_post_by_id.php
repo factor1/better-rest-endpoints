@@ -99,6 +99,9 @@ function get_post_by_id( $data ) {
   	}
   } else {
   	// no posts found
+    $bwepost = [];
+
+    return $bwe_post;
   }
 
   // Restore original Post Data
