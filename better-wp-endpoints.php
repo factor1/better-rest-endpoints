@@ -29,8 +29,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
+// include acf function
+include_once 'includes/get_acf.php';
+
 // get a post by id
-include_once 'inc/get_post_by_id.php';
+include_once 'includes/get_post_by_id.php';
 
 // get posts
-include_once 'inc/get_posts.php';
+include_once 'includes/get_posts.php';
+
+// get pages
+include_once 'includes/get_pages.php';

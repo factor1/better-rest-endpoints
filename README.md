@@ -44,10 +44,30 @@ Returns a JSON response with the following:
 - date (ISO 8601)
 - excerpt
 - content
-- all possible thumbnail sizes & URL
+- all possible thumbnail sizes & URLs
 - Author & Author Link
 - Categories
 - Category IDs
 - Tags
 - Tag IDs
 - ACF fields, if applicable
+
+### Pages
+**`better-wp-endpoints/v1/pages`**
+Gets a collection of pages. Accepts the following parameters:
+
+- exclude (int)
+- orderby (string)
+- order (string - 'ASC' vs 'DESC')
+- per_page (int)
+- page (int)
+- content (boolean - setting to false hides the content from the response)
+
+Returns the following JSON Response:
+
+- ID
+- Slug
+- Title
+- Content
+- ACF Fields
+- all possible thumbnail sizes & URLs

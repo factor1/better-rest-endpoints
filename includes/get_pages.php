@@ -7,8 +7,6 @@
  * @since 0.0.1
  */
 
-include 'get_acf.php';
-
 // get a collection of pages with parameters
 function bwe_get_pages( WP_REST_Request $request ) {
 
@@ -103,9 +101,9 @@ function bwe_get_pages( WP_REST_Request $request ) {
   *
   */
  add_action( 'rest_api_init', function () {
-   register_rest_route( 'better-wp-endpoints/v1', '/posts/', array(
+   register_rest_route( 'better-wp-endpoints/v1', '/pages/', array(
      'methods' => 'GET',
-     'callback' => 'bwe_get_posts',
+     'callback' => 'bwe_get_pages',
      'args' => array(
        'per_page' => array(
          'validate_callback' => 'is_numeric'

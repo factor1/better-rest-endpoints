@@ -7,9 +7,6 @@
  * @since 0.0.1
  */
 
-// include acf function
-include 'get_acf.php';
-
 function bwe_get_posts( WP_REST_Request $request ) {
 
   // check for params
