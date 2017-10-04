@@ -17,6 +17,7 @@ function bwe_get_posts( WP_REST_Request $request ) {
   $page = $request['page']?: '1';
   $category = $request['category']?: null;
   $tag = $request['tag']?: null;
+  $show_content = $request['content']?: 'true';
 
   // WP_Query arguments
   $args = array(
@@ -45,7 +46,12 @@ function bwe_get_posts( WP_REST_Request $request ) {
       $bwe_post->title = get_the_title();
       $bwe_post->date = get_the_date('c');
       $bwe_post->excerpt = get_the_excerpt();
-      $bwe_post->content = get_the_content();
+
+      // show post content unless parameter is false
+      if( $show_content === 'true' ) {
+        $bwe_post->content = get_the_content();
+      }
+
       $bwe_post->author = esc_html__(get_the_author(), 'text_domain');
       $bwe_post->author_id = get_the_author_meta('ID');
 
@@ -147,6 +153,9 @@ add_action( 'rest_api_init', function () {
       ),
       'tag' =>  array(
         'validate_callback' => 'is_numeric'
+      ),
+      'content' =>  array(
+        'validate_callback' => 'is_boolean'
       ),
     ),
   ) );
