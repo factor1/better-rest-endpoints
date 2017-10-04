@@ -2,6 +2,8 @@
 A WordPress plugin that serves up slimmer WP Rest API endpoints - WIP
 
 ## Endpoints
+
+### Posts
 **`better-wp-endpoints/v1/posts`**
 Gets a collection of posts. Accepts the following parameters:
 
@@ -9,6 +11,7 @@ Gets a collection of posts. Accepts the following parameters:
 - per_page (int)
 - category id (int)
 - tag id  (int)
+- content (boolean) set to false to omit content from showing in JSON response
 
 It returns a JSON response with the following:
 - id
