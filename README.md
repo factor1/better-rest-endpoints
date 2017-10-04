@@ -27,3 +27,27 @@ It returns a JSON response with the following:
 - Tags
 - Tag IDs
 - ACF fields, if applicable
+
+### Post
+**`better-wp-endpoints/v1/post/{id}`**
+Get a post by ID.
+
+Accepts the following parameters:
+
+- ID (int)
+
+Returns a JSON response with the following:
+
+- id
+- slug
+- title
+- date (ISO 8601)
+- excerpt
+- content
+- all possible thumbnail sizes & URL
+- Author & Author Link
+- Categories
+- Category IDs
+- Tags
+- Tag IDs
+- ACF fields, if applicable
