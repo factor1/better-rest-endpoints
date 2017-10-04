@@ -1,6 +1,6 @@
 <?php
 /**
- * Grab latest post title by an author!
+ * Grab latest post by ID
  *
  * @param array $data Options for the function.
  * @return string|null Post title for the latest,  * or null if none.
