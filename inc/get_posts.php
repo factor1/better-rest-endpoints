@@ -7,6 +7,9 @@
  * @since 0.0.1
  */
 
+// include acf function
+include 'get_acf.php';
+
 function bwe_get_posts( WP_REST_Request $request ) {
 
   // check for params
@@ -35,7 +38,7 @@ function bwe_get_posts( WP_REST_Request $request ) {
   	while ( $query->have_posts() ) {
   		$query->the_post();
 
-      // better wordpress endpoint post
+      // better wordpress endpoint post object
       $bwe_post = new stdClass();
 
       $bwe_post->id = get_the_ID();
@@ -43,8 +46,57 @@ function bwe_get_posts( WP_REST_Request $request ) {
       $bwe_post->date = get_the_date('c');
       $bwe_post->excerpt = get_the_excerpt();
       $bwe_post->content = get_the_content();
+      $bwe_post->author = esc_html__(get_the_author(), 'text_domain');
+      $bwe_post->author_id = get_the_author_meta('ID');
 
-      // get all possible thumbnail sources
+      /*
+       *
+       * get category data using get_the_category()
+       *
+       */
+      $categories = get_the_category();
+
+      $bwe_categories = [];
+      $bwe_category_ids = [];
+
+      foreach ($categories as $key => $category) {
+        array_push($bwe_category_ids, $category->term_id);
+        array_push($bwe_categories, $category->cat_name);
+      }
+
+      $bwe_post->category_ids = $bwe_category_ids;
+      $bwe_post->category_names = $bwe_categories;
+
+      /*
+       *
+       * get tag data using get_the_tags()
+       *
+       */
+      $tags = get_the_tags();
+
+      $bwe_tags = [];
+      $bwe_tag_ids = [];
+
+      foreach ($tags as $key => $tag) {
+        array_push($bwe_tag_ids, $tag->term_id);
+        array_push($bwe_tags, $tag->name);
+      }
+
+      $bwe_post->tag_ids = $bwe_tag_ids;
+      $bwe_post->tag_names = $bwe_tags;
+
+      /*
+       *
+       * return acf fields if they exist
+       *
+       */
+      $bwe_post->acf = bwe_get_acf();
+
+      /*
+       *
+       * get possible thumbnail sizes and urls
+       *
+       */
       $thumbnail_names = get_intermediate_image_sizes();
       $bwe_thumbnails = new stdClass();
 
@@ -58,11 +110,15 @@ function bwe_get_posts( WP_REST_Request $request ) {
         $bwe_post->media = false;
       }
 
+      // Push the post to the main $post array
       array_push($posts, $bwe_post);
   	}
+
+    // return the post array
     return $posts;
+
   } else {
-    // return empty posts array
+    // return empty posts array if no posts
   	return $posts;
   }
 
@@ -70,6 +126,11 @@ function bwe_get_posts( WP_REST_Request $request ) {
   wp_reset_postdata();
 }
 
+/*
+ *
+ * Register Rest API Endpoint
+ *
+ */
 add_action( 'rest_api_init', function () {
   register_rest_route( 'better-wp-endpoints/v1', '/posts/', array(
     'methods' => 'GET',

@@ -1,0 +1,27 @@
+<?php
+/**
+ * Return ACF Fields
+ *
+ * @param none
+ * @return object|null ACF object,  * or null if none.
+ * @since 0.0.1
+ */
+
+function bwe_get_acf() {
+  // check if acf is active before doing anything
+   if( is_plugin_active('advanced-custom-fields-pro/acf.php') || is_plugin_active('advanced-custom-fields/acf.php') ) {
+
+     // get fields
+     $acf_fields = get_fields();
+
+     // if we have fields
+     if( $acf_fields ) {
+       return $acf_fields;
+     }
+
+     return true;
+   } else {
+     // no acf, return false
+     return false;
+   }
+}
