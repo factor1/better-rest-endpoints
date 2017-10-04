@@ -3,7 +3,7 @@
  * Get a collection of posts.
  *
  * @param array $request Options for the function.
- * @return object|null Post object,  * or null if none.
+ * @return array|null Post array,  * or null if none.
  * @since 0.0.1
  */
 
@@ -42,6 +42,7 @@ function bwe_get_posts( WP_REST_Request $request ) {
       // better wordpress endpoint post object
       $bwe_post = new stdClass();
 
+      // get post data
       $bwe_post->id = get_the_ID();
       $bwe_post->title = get_the_title();
       $bwe_post->date = get_the_date('c');
