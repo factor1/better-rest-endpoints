@@ -19,7 +19,6 @@ function bwe_get_acf() {
        return $acf_fields;
      }
 
-     return true;
    } else {
      // no acf, return false
      return false;
