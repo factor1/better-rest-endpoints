@@ -48,6 +48,7 @@ function bwe_get_pages( WP_REST_Request $request ) {
        */
       $bwe_page->id = get_the_ID();
       $bwe_page->title = get_the_title();
+      $bwe_page->slug = basename(get_permalink());
 
       // show post content unless parameter is false
       if( $show_content === 'true' ) {

@@ -42,6 +42,7 @@ function bwe_get_posts( WP_REST_Request $request ) {
       // get post data
       $bwe_post->id = get_the_ID();
       $bwe_post->title = get_the_title();
+      $bwe_post->slug = basename(get_permalink());
       $bwe_post->date = get_the_date('c');
       $bwe_post->excerpt = get_the_excerpt();
 

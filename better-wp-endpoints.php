@@ -96,4 +96,4 @@ class F1_Better_WP_Endpoints {
 function better_wp_endpoints() {
 	return F1_Better_WP_Endpoints::instance();
 }
-add_action( 'plugins_loaded', 'better_wp_endpoints' );
+add_action( 'plugins_loaded', 'better_wp_endpoints', 99 );
