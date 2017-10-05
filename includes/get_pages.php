@@ -116,10 +116,10 @@ function bwe_get_pages( WP_REST_Request $request ) {
          'validate_callback' => 'is_numeric'
        ),
        'order' =>  array(
-         'validate_callback' => 'is_numeric' // change to string
+         'validate_callback' => 'is_string'
        ),
        'orderby' =>  array(
-         'validate_callback' => 'is_numeric' // change to string
+         'validate_callback' => 'is_string'
        ),
      ),
    ) );
