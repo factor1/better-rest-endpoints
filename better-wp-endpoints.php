@@ -29,14 +29,71 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-// include acf function
-include_once 'includes/get_acf.php';
+class F1_Better_WP_Endpoints {
 
-// get a post by id
-include_once 'includes/get_post_by_id.php';
+	/**
+	 * @var $instance - The One true copy of F1_Better_WP_Endpoints that we'll ever need
+	 */
+	private static $instance;
 
-// get posts
-include_once 'includes/get_posts.php';
+	/**
+	 * @var $plugin_dir - The plugin directory, for reuse in the includes.
+	 */
+	private static $plugin_dir;
 
-// get pages
-include_once 'includes/get_pages.php';
+	/**
+	 * F1_Better_WP_Endpoints constructor.
+	 */
+	private function __construct() {}
+
+	/**
+	 * Determines if we've already loaded the plugin, and if so returns it.
+	 * Otherwise it kicks up a new instance of itself and stores it for later use.
+	 *
+	 * This is the singleton method.
+	 *
+	 * @return F1_Better_WP_Endpoints
+	 */
+	public function instance() {
+		if ( ! isset( self::$instance ) && ! ( self::$instance instanceof F1_Better_WP_Endpoints ) ) {
+			self::$instance = new F1_Better_WP_Endpoints;
+
+			self::$plugin_dir = trailingslashit( dirname( __FILE__ ) );
+
+			// Load the includes
+			self::$instance->includes();
+		}
+
+		return self::$instance;
+	}
+
+	/**
+	 * Include the necessary files.
+	 */
+	private function includes() {
+		// include acf function
+		include_once self::$plugin_dir . 'includes/get_acf.php';
+
+		// get a post by id
+		include_once self::$plugin_dir . 'includes/get_post_by_id.php';
+
+		// get posts
+		include_once self::$plugin_dir . 'includes/get_posts.php';
+
+		// get pages
+		include_once self::$plugin_dir . 'includes/get_pages.php';
+	}
+
+}
+
+/**
+ * Returns the one true F1_Better_WP_Endpoints.
+ *
+ * Loads on plugins_loaded.
+ *
+ * @return F1_Better_WP_Endpoints
+ */
+function better_wp_endpoints() {
+	return F1_Better_WP_Endpoints::instance();
+}
+add_action( 'plugins_loaded', 'better_wp_endpoints' );
