@@ -11,7 +11,7 @@ function get_page_by_id( WP_REST_Request $request ){
 
   // query arguments
   $args = array(
-    'page_id'   => $data['id']
+    'page_id'   => $request['id']
   );
 
   // The Query
