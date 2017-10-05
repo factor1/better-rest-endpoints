@@ -71,3 +71,20 @@ Returns the following JSON Response:
 - Content
 - ACF Fields
 - all possible thumbnail sizes & URLs
+
+### Page by ID
+**`better-wp-endpoints/v1/page/{id}`**
+Get a page by ID.
+
+Accepts the following parameters:
+
+- ID (int)
+
+Returns a JSON response with the following:
+
+- id
+- slug
+- title
+- content
+- all possible thumbnail sizes & URLs
+- ACF fields, if applicable
