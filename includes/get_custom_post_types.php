@@ -47,6 +47,7 @@ function bwe_build_cpt_endpoints() {
 
     foreach ($cpt_collection as $key => $cpt) {
 
+
       // Make the magic happen
 
 
@@ -58,7 +59,7 @@ function bwe_build_cpt_endpoints() {
 
         register_rest_route( 'better-wp-endpoints/v1', '/'.$cpt.'/', array(
           'methods' => 'GET',
-          'callback' => function ( WP_REST_Request $request, $cpt ) {
+          'callback' => function ( WP_REST_Request $request ) use($cpt) {
 
             // check for params
             $posts_per_page = $request['per_page']?: '10';
