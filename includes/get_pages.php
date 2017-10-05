@@ -107,19 +107,32 @@ function bwe_get_pages( WP_REST_Request $request ) {
      'callback' => 'bwe_get_pages',
      'args' => array(
        'per_page' => array(
-         'validate_callback' => 'is_numeric'
+         'description'       => 'Maxiumum number of items to show per page.',
+         'type'              => 'integer',
+         'validate_callback' => 'is_numeric',
+         'sanitize_callback' => 'absint',
        ),
        'page' =>  array(
-         'validate_callback' => 'is_numeric'
+         'description'       => 'Current page of the collection.',
+         'type'              => 'integer',
+         'validate_callback' => 'is_numeric',
+         'sanitize_callback' => 'absint',
        ),
        'exclude' =>  array(
-         'validate_callback' => 'is_numeric'
+         'description'       => 'Exclude an item from the collection.',
+         'type'              => 'integer',
+         'validate_callback' => 'is_numeric',
+         'sanitize_callback' => 'absint',
        ),
        'order' =>  array(
-         'validate_callback' => 'is_string'
+         'description'       => 'Change order of the collection.',
+         'type'              => 'string',
+         'sanitize_callback' => 'sanitize_text_field',
        ),
        'orderby' =>  array(
-         'validate_callback' => 'is_string'
+         'description'       => 'Change how the collection is ordered.',
+         'type'              => 'string',
+         'sanitize_callback' => 'sanitize_text_field',
        ),
      ),
    ) );
