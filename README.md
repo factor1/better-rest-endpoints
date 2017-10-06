@@ -21,7 +21,7 @@ It returns a JSON response with the following:
 - excerpt
 - content
 - all possible thumbnail sizes & URL
-- Author & Author Link
+- Author & Author ID
 - Categories
 - Category IDs
 - Tags
@@ -45,7 +45,7 @@ Returns a JSON response with the following:
 - excerpt
 - content
 - all possible thumbnail sizes & URLs
-- Author & Author Link
+- Author & Author ID
 - Categories
 - Category IDs
 - Tags
@@ -88,3 +88,41 @@ Returns a JSON response with the following:
 - content
 - all possible thumbnail sizes & URLs
 - ACF fields, if applicable
+
+### Custom Post Type Collection
+**`better-wp-endpoints/v1/{custom_post_type}`**
+Gets a collection of posts from a custom post type. Accepts the following parameters:
+
+- per_page (int)
+- page (int)
+- content (boolean - setting to false omits `the_content` from being returned)
+
+Returns the following JSON response:
+
+- ID
+- slug
+- title
+- date (ISO 8601)
+- excerpt
+- content
+- all possible thumbnail sizes & URLs
+- Author & Author ID
+- ACF fields if applicable
+
+### Custom Post Type Post
+**`better-wp-endpoints/v1/{custom_post_type}/{id}`**
+Gets a single custom post type item. Accepts the following parameters:
+
+- ID
+
+Returns the following JSON Response:
+
+- ID
+- slug
+- title
+- date (ISO 8601)
+- excerpt
+- content
+- all possible thumbnail sizes & URLs
+- Author & Author ID
+- ACF Fields, if applicable

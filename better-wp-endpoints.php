@@ -86,8 +86,14 @@ class F1_Better_WP_Endpoints {
     // get page by id
 		include_once self::$plugin_dir . 'includes/get_page_by_id.php';
 
-    // get custom post types
-		include_once self::$plugin_dir . 'includes/get_custom_post_types.php';
+    // get cpts
+    include_once self::$plugin_dir . 'includes/get_cpts.php';
+
+    // create custom post type endpoints
+		include_once self::$plugin_dir . 'includes/create_cpt_endpoints.php';
+
+    // get custom post type by id
+		include_once self::$plugin_dir . 'includes/get_cpt_by_id.php';
 	}
 
 }
