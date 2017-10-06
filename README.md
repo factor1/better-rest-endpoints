@@ -103,6 +103,7 @@ Returns the following JSON response:
 - slug
 - title
 - date (ISO 8601)
+- post terms 
 - excerpt
 - content
 - all possible thumbnail sizes & URLs
@@ -121,6 +122,7 @@ Returns the following JSON Response:
 - slug
 - title
 - date (ISO 8601)
+- post terms
 - excerpt
 - content
 - all possible thumbnail sizes & URLs

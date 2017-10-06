@@ -67,6 +67,20 @@ function bwe_build_cpt_endpoints() {
 
                 /*
                  *
+                 * get the terms
+                 *
+                 */
+                if( get_object_taxonomies($cpt) ){
+                  $cpt_taxonomies = get_object_taxonomies($cpt, 'names');
+
+                  $bwe_post->terms = get_the_terms(get_the_ID(), $cpt_taxonomies);
+
+                } else {
+                  $bwe_post->terms = array();
+                }
+
+                /*
+                 *
                  * return acf fields if they exist
                  *
                  */
