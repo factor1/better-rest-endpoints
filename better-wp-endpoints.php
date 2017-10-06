@@ -94,6 +94,9 @@ class F1_Better_WP_Endpoints {
 
     // get custom post type by id
 		include_once self::$plugin_dir . 'includes/get_cpt_by_id.php';
+
+    // get custom post type by id
+		include_once self::$plugin_dir . 'includes/wp_nav_menus.php';
 	}
 
 }

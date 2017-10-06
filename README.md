@@ -103,7 +103,7 @@ Returns the following JSON response:
 - slug
 - title
 - date (ISO 8601)
-- post terms 
+- post terms
 - excerpt
 - content
 - all possible thumbnail sizes & URLs
@@ -128,3 +128,16 @@ Returns the following JSON Response:
 - all possible thumbnail sizes & URLs
 - Author & Author ID
 - ACF Fields, if applicable
+
+### Menus
+**`better-wp-endpoints/v1/menus/{menu-slug}`**
+Gets a WordPress Menu by slug. Accepts no parameters.
+
+Returns the following JSON Response in each item object:
+
+- menu_order
+- title
+- url
+- target
+- description
+- classes (array)
