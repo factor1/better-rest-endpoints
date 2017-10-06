@@ -1,0 +1,161 @@
+<?php
+/**
+ * Get a collection of posts.
+ *
+ * @param array $request Options for the function.
+ * @return array|null Post array,  * or null if none.
+ * @since 0.0.1
+ */
+
+function bwe_get_posts( WP_REST_Request $request ) {
+
+  // check for params
+  $posts_per_page = $request['per_page']?: '10';
+  $page = $request['page']?: '1';
+  $category = $request['category']?: null;
+  $tag = $request['tag']?: null;
+  $show_content = $request['content']?: 'true';
+
+  // WP_Query arguments
+  $args = array(
+  	'nopaging'               => false,
+  	'posts_per_page'         => $posts_per_page,
+    'paged'                  => $page,
+    'cat'                    => $category,
+    'tag_id'                 => $tag,
+  );
+
+  // The Query
+  $query = new WP_Query( $args );
+
+  // Setup Posts Array
+  $posts = array();
+
+  // The Loop
+  if ( $query->have_posts() ) {
+  	while ( $query->have_posts() ) {
+  		$query->the_post();
+
+      // better wordpress endpoint post object
+      $bwe_post = new stdClass();
+
+      // get post data
+      $bwe_post->id = get_the_ID();
+      $bwe_post->title = get_the_title();
+      $bwe_post->slug = basename(get_permalink());
+      $bwe_post->date = get_the_date('c');
+      $bwe_post->excerpt = get_the_excerpt();
+
+      // show post content unless parameter is false
+      if( $show_content === 'true' ) {
+        $bwe_post->content = get_the_content();
+      }
+
+      $bwe_post->author = esc_html__(get_the_author(), 'text_domain');
+      $bwe_post->author_id = get_the_author_meta('ID');
+
+      /*
+       *
+       * get category data using get_the_category()
+       *
+       */
+      $categories = get_the_category();
+
+      $bwe_categories = [];
+      $bwe_category_ids = [];
+
+      foreach ($categories as $key => $category) {
+        array_push($bwe_category_ids, $category->term_id);
+        array_push($bwe_categories, $category->cat_name);
+      }
+
+      $bwe_post->category_ids = $bwe_category_ids;
+      $bwe_post->category_names = $bwe_categories;
+
+      /*
+       *
+       * get tag data using get_the_tags()
+       *
+       */
+      $tags = get_the_tags();
+
+      $bwe_tags = [];
+      $bwe_tag_ids = [];
+
+      foreach ($tags as $key => $tag) {
+        array_push($bwe_tag_ids, $tag->term_id);
+        array_push($bwe_tags, $tag->name);
+      }
+
+      $bwe_post->tag_ids = $bwe_tag_ids;
+      $bwe_post->tag_names = $bwe_tags;
+
+      /*
+       *
+       * return acf fields if they exist
+       *
+       */
+      $bwe_post->acf = bwe_get_acf();
+
+      /*
+       *
+       * get possible thumbnail sizes and urls
+       *
+       */
+      $thumbnail_names = get_intermediate_image_sizes();
+      $bwe_thumbnails = new stdClass();
+
+      if( has_post_thumbnail() ){
+        foreach ($thumbnail_names as $key => $name) {
+          $bwe_thumbnails->$name = esc_url(get_the_post_thumbnail_url($post->ID, $name));
+        }
+
+        $bwe_post->media = $bwe_thumbnails;
+      } else {
+        $bwe_post->media = false;
+      }
+
+      // Push the post to the main $post array
+      array_push($posts, $bwe_post);
+  	}
+
+    // return the post array
+    return $posts;
+
+  } else {
+    // return empty posts array if no posts
+  	return $posts;
+  }
+
+  // Restore original Post Data
+  wp_reset_postdata();
+}
+
+/*
+ *
+ * Register Rest API Endpoint
+ *
+ */
+add_action( 'rest_api_init', function () {
+  register_rest_route( 'better-wp-endpoints/v1', '/posts/', array(
+    'methods' => 'GET',
+    'callback' => 'bwe_get_posts',
+    'args' => array(
+      'per_page' => array(
+        'validate_callback' => 'is_numeric'
+      ),
+      'page' =>  array(
+        'validate_callback' => 'is_numeric'
+      ),
+      'category' =>  array(
+        'validate_callback' => 'is_numeric'
+      ),
+      'tag' =>  array(
+        'validate_callback' => 'is_numeric'
+      ),
+      'content' =>  array(
+        'validate_callback' => 'is_boolean'
+      ),
+    ),
+  ) );
+} );
