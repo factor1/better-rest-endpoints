@@ -25,16 +25,16 @@ function bwe_get_menus() {
     $slim_menu_items = array();
 
     foreach ($menu_items as $key => $menu_item) {
-      // create a new object for a smaller response 
       $items = new stdClass();
 
-      // get menu item data and add it to our new object
+      $items->ID = $menu_item->ID;
       $items->menu_order = $menu_item->menu_order;
       $items->title = $menu_item->title;
       $items->url = $menu_item->url;
       $items->target = $menu_item->target;
       $items->description = $menu_item->description;
       $items->classes = $menu_item->classes;
+      $items->menu_item_parent = $menu_item->menu_item_parent;
 
       array_push($slim_menu_items, $items);
     }
