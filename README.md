@@ -135,9 +135,11 @@ Gets a WordPress Menu by slug. Accepts no parameters.
 
 Returns the following JSON Response in each item object:
 
+- ID
 - menu_order
 - title
 - url
 - target
 - description
 - classes (array)
+- menu item parent 
