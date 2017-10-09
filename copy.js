@@ -1,5 +1,5 @@
 const fs = require('fs-extra'),
-      target = '/Users/ericstout/Local Sites/reacttestwp/app/public/wp-content/plugins/better-wp-endpoints',
+      target = '/Users/ericstout/Documents/projects/tallwave/app/public/wp-content/plugins/better-wp-endpoints',
       files = './';
 
 fs.copy(files, target)

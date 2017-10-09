@@ -67,6 +67,7 @@ Returns the following JSON Response:
 
 - ID
 - Slug
+- Template Name
 - Title
 - Content
 - ACF Fields
@@ -85,6 +86,7 @@ Returns a JSON response with the following:
 - id
 - slug
 - title
+- template name 
 - content
 - all possible thumbnail sizes & URLs
 - ACF fields, if applicable
@@ -142,4 +144,4 @@ Returns the following JSON Response in each item object:
 - target
 - description
 - classes (array)
-- menu item parent 
+- menu item parent

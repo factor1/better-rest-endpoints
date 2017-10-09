@@ -50,6 +50,22 @@ function bwe_get_pages( WP_REST_Request $request ) {
       $bwe_page->title = get_the_title();
       $bwe_page->slug = basename(get_permalink());
 
+      /*
+       *
+       * return template name
+       *
+       */
+      if( get_page_template() ){
+        // strip file extension to return just the name of the template
+        $template_name = preg_replace('/\\.[^.\\s]{3,4}$/', '', basename(get_page_template()));
+
+        $bwe_page->template = $template_name;
+        
+      } else {
+        $bwe_page->template = 'default';
+      }
+
+
       // show post content unless parameter is false
       if( $show_content === 'true' ) {
         $bwe_page->content = get_the_content();
