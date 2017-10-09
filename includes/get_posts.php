@@ -64,9 +64,11 @@ function bwe_get_posts( WP_REST_Request $request ) {
       $bwe_categories = [];
       $bwe_category_ids = [];
 
-      foreach ($categories as $key => $category) {
-        array_push($bwe_category_ids, $category->term_id);
-        array_push($bwe_categories, $category->cat_name);
+      if( !empty($categories) ){
+        foreach ($categories as $key => $category) {
+          array_push($bwe_category_ids, $category->term_id);
+          array_push($bwe_categories, $category->cat_name);
+        }
       }
 
       $bwe_post->category_ids = $bwe_category_ids;
@@ -82,10 +84,13 @@ function bwe_get_posts( WP_REST_Request $request ) {
       $bwe_tags = [];
       $bwe_tag_ids = [];
 
-      foreach ($tags as $key => $tag) {
-        array_push($bwe_tag_ids, $tag->term_id);
-        array_push($bwe_tags, $tag->name);
+      if( !empty($tags) ){
+        foreach ($tags as $key => $tag) {
+          array_push($bwe_tag_ids, $tag->term_id);
+          array_push($bwe_tags, $tag->name);
+        }
       }
+
 
       $bwe_post->tag_ids = $bwe_tag_ids;
       $bwe_post->tag_names = $bwe_tags;
