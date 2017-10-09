@@ -51,7 +51,7 @@ function bwe_build_single_cpt_endpoints() {
                 $bwe_cpt_post->slug = basename(get_permalink());
                 $bwe_cpt_post->date = get_the_date('c');
                 $bwe_cpt_post->excerpt = get_the_excerpt();
-                $bwe_cpt_post->content = get_the_content();
+                $bwe_cpt_post->content = apply_filters('the_content', get_the_content());
                 $bwe_cpt_post->author = esc_html__(get_the_author(), 'text_domain');
                 $bwe_cpt_post->author_id = get_the_author_meta('ID');
 
