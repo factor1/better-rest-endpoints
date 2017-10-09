@@ -30,6 +30,7 @@ function bwe_get_menus() {
       $items->ID = $menu_item->ID;
       $items->menu_order = $menu_item->menu_order;
       $items->title = $menu_item->title;
+      $items->slug = basename($menu_item->url);
       $items->url = $menu_item->url;
       $items->target = $menu_item->target;
       $items->description = $menu_item->description;
