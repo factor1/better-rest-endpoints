@@ -48,7 +48,7 @@ function bwe_get_posts( WP_REST_Request $request ) {
 
       // show post content unless parameter is false
       if( $show_content === 'true' ) {
-        $bwe_post->content = get_the_content();
+        $bwe_post->content = apply_filters('the_content', get_the_content());
       }
 
       $bwe_post->author = esc_html__(get_the_author(), 'text_domain');

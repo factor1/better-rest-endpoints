@@ -44,7 +44,7 @@ function get_page_by_id( WP_REST_Request $request ){
         $bwe_page->template = 'default';
       }
 
-      $bwe_page->content = get_the_content();
+      $bwe_page->content = apply_filters('the_content', get_the_content());
 
 
       /*

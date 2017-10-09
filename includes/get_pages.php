@@ -60,7 +60,7 @@ function bwe_get_pages( WP_REST_Request $request ) {
         $template_name = preg_replace('/\\.[^.\\s]{3,4}$/', '', basename(get_page_template()));
 
         $bwe_page->template = $template_name;
-        
+
       } else {
         $bwe_page->template = 'default';
       }
@@ -68,7 +68,7 @@ function bwe_get_pages( WP_REST_Request $request ) {
 
       // show post content unless parameter is false
       if( $show_content === 'true' ) {
-        $bwe_page->content = get_the_content();
+        $bwe_page->content = apply_filters('the_content', get_the_content());
       }
 
       /*
