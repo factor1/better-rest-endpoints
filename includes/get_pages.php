@@ -125,7 +125,7 @@ function bwe_get_pages( WP_REST_Request $request ) {
        'per_page' => array(
          'description'       => 'Maxiumum number of items to show per page.',
          'type'              => 'integer',
-         'validate_callback' => 'is_numeric',
+         'validate_callback' => function( $v ) { return is_numeric( $v );},
          'sanitize_callback' => 'absint',
        ),
        'page' =>  array(

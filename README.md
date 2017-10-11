@@ -112,11 +112,30 @@ Returns the following JSON response:
 - Author & Author ID
 - ACF fields if applicable
 
-### Custom Post Type Post
+### Custom Post Type Post by ID
 **`better-wp-endpoints/v1/{custom_post_type}/{id}`**
 Gets a single custom post type item. Accepts the following parameters:
 
 - ID
+
+Returns the following JSON Response:
+
+- ID
+- slug
+- title
+- date (ISO 8601)
+- post terms
+- excerpt
+- content
+- all possible thumbnail sizes & URLs
+- Author & Author ID
+- ACF Fields, if applicable
+
+### Custom Post Type Post by Slug
+**`better-wp-endpoints/v1/{custom_post_type}/{slug}`**
+Gets a single custom post type item. Accepts the following parameters:
+
+- slug
 
 Returns the following JSON Response:
 
@@ -141,7 +160,7 @@ Returns the following JSON Response in each item object:
 - menu_order
 - title
 - url
-- slug 
+- slug
 - target
 - description
 - classes (array)
