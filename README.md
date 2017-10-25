@@ -150,6 +150,27 @@ Returns the following JSON Response:
 - Author & Author ID
 - ACF Fields, if applicable
 
+### Get Posts Belonging To A Taxonomy Term
+**`better-wp-endpoints/v1/{taxonomy}/{term}`**
+Gets posts from a taxonomy term. Accepts rthe following parameters:
+
+- per_page (int)
+- page (int)
+- content (boolean - setting to false omits `the_content` from being returned)
+
+Returns the following JSON Response:
+
+- ID
+- slug
+- title
+- date (ISO 8601)
+- post terms
+- excerpt
+- content
+- all possible thumbnail sizes & URLs
+- Author & Author ID
+- ACF Fields, if applicable
+
 ### Menus
 **`better-wp-endpoints/v1/menus/{menu-slug}`**
 Gets a WordPress Menu by slug. Accepts no parameters.
