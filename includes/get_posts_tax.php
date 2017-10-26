@@ -3,7 +3,7 @@
  * Get Posts by Taxonomy
  *
  * @param none
- * @return object|null ACF object,  * or null if none.
+ * @return endpoint returns a WordPress Rest API Endpoint
  * @since 0.1.8
  */
 
@@ -56,11 +56,12 @@ function bwe_build_custom_tax_endpoint() {
               if( $query->have_posts() ){
 
                 // setup post object
-                $bwe_tax_post = new stdClass();
+                $bwe_tax_posts = array();
 
                 while( $query->have_posts() ) {
                   $query->the_post();
 
+                  $bwe_tax_post = new stdClass();
 
                   // get post data
                   $bwe_tax_post->id = get_the_ID();
@@ -115,9 +116,13 @@ function bwe_build_custom_tax_endpoint() {
                     $bwe_tax_post->media = false;
                   }
 
-                }
+                  // push the post to the main array
+                  array_push($bwe_tax_posts, $bwe_tax_post);
 
-                return $bwe_tax_post;
+                }
+                // return the post array 
+                return $bwe_tax_posts;
+
               } else {
                 // if no post is found
                 return array();
