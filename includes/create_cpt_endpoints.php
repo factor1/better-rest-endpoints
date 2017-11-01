@@ -27,6 +27,7 @@ function bwe_build_cpt_endpoints() {
             $posts_per_page = $request['per_page']?: '10';
             $page = $request['page']?: '1';
             $show_content = $request['content']?: 'true';
+            $orderby = $request['orderby']? : null;
 
             // WP_Query arguments
             $args = array(
@@ -34,6 +35,7 @@ function bwe_build_cpt_endpoints() {
             	'nopaging'               => false,
             	'posts_per_page'         => $posts_per_page,
               'paged'                  => $page,
+              'orderby'                => $orderby
             );
 
             // The Query
