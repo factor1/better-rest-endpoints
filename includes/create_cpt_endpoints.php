@@ -123,19 +123,42 @@ function bwe_build_cpt_endpoints() {
           },
           'args' => array(
             'per_page' => array(
-              'validate_callback' => 'is_numeric'
+              'description'       => 'Maxiumum number of items to show per page.',
+              'type'              => 'integer',
+              'validate_callback' => function( $param, $request, $key ) {
+                return is_numeric( $param );
+               },
+              'sanitize_callback' => 'absint',
             ),
             'page' =>  array(
-              'validate_callback' => 'is_numeric'
-            ),
-            'category' =>  array(
-              'validate_callback' => 'is_numeric'
-            ),
-            'tag' =>  array(
-              'validate_callback' => 'is_numeric'
+              'description'       => 'Current page of the collection.',
+              'type'              => 'integer',
+              'validate_callback' => function( $param, $request, $key ) {
+                return is_numeric( $param );
+               },
+              'sanitize_callback' => 'absint'
             ),
             'content' =>  array(
-              'validate_callback' => 'is_boolean'
+              'description'       => 'Hide or show the_content from the collection.',
+              'type'              => 'boolean',
+              'validate_callback' => function( $param, $request, $key ) {
+
+                if ( $param == 'true' || $param == 'TRUE' ) {
+                  $param = true;
+                } else if( $param == 'false' || $param == 'FALSE') {
+                  $param = false;
+                }
+
+                return is_bool( $param );
+               }
+            ),
+            'orderby' =>  array(
+              'description'       => 'The sort order of the collection.',
+              'type'              => 'string',
+              'validate_callback' => function($param, $request, $key) {
+                  return is_string( $param );
+                },
+              'sanitize_callback' => 'sanitize_text_field'
             ),
           ),
         ) );
