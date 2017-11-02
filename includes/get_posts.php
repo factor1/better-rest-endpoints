@@ -14,7 +14,7 @@ function bwe_get_posts( WP_REST_Request $request ) {
   $page = $request['page']?: '1';
   $category = $request['category']?: null;
   $tag = $request['tag']?: null;
-  $show_content = $request['content']?: 'true';
+  $show_content = $request['content']?: true;
 
   // WP_Query arguments
   $args = array(
@@ -47,7 +47,7 @@ function bwe_get_posts( WP_REST_Request $request ) {
       $bwe_post->excerpt = get_the_excerpt();
 
       // show post content unless parameter is false
-      if( $show_content === 'true' ) {
+      if( $show_content == true ) {
         $bwe_post->content = apply_filters('the_content', get_the_content());
       }
 
@@ -147,19 +147,50 @@ add_action( 'rest_api_init', function () {
     'callback' => 'bwe_get_posts',
     'args' => array(
       'per_page' => array(
-        'validate_callback' => 'is_numeric'
+        'description'       => 'Maxiumum number of items to show per page.',
+        'type'              => 'integer',
+        'validate_callback' => function( $param, $request, $key ) {
+          return is_numeric( $param );
+         },
+        'sanitize_callback' => 'absint',
       ),
       'page' =>  array(
-        'validate_callback' => 'is_numeric'
+        'description'       => 'Current page of the collection.',
+        'type'              => 'integer',
+        'validate_callback' => function( $param, $request, $key ) {
+          return is_numeric( $param );
+         },
+        'sanitize_callback' => 'absint'
       ),
       'category' =>  array(
-        'validate_callback' => 'is_numeric'
+        'description'       => 'Get a category from the collection.',
+        'type'              => 'integer',
+        'validate_callback' => function( $param, $request, $key ) {
+          return is_numeric( $param );
+         },
+        'sanitize_callback' => 'absint'
       ),
       'tag' =>  array(
-        'validate_callback' => 'is_numeric'
+        'description'       => 'Get a tag from the collection.',
+        'type'              => 'integer',
+        'validate_callback' => function( $param, $request, $key ) {
+          return is_numeric( $param );
+         },
+        'sanitize_callback' => 'absint'
       ),
       'content' =>  array(
-        'validate_callback' => 'is_boolean'
+        'description'       => 'Hide or show the_content from the collection.',
+        'type'              => 'boolean',
+        'validate_callback' => function( $param, $request, $key ) {
+
+          if ( $param == 'true' || $param == 'TRUE' ) {
+            $param = true;
+          } else if( $param == 'false' || $param == 'FALSE') {
+            $param = false;
+          }
+
+          return is_bool( $param );
+         }
       ),
     ),
   ) );

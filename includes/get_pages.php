@@ -125,29 +125,41 @@ function bwe_get_pages( WP_REST_Request $request ) {
        'per_page' => array(
          'description'       => 'Maxiumum number of items to show per page.',
          'type'              => 'integer',
-         'validate_callback' => function( $v ) { return is_numeric( $v );},
+         'validate_callback' => function( $param, $request, $key ) {
+           return is_numeric( $param );
+          },
          'sanitize_callback' => 'absint',
        ),
        'page' =>  array(
          'description'       => 'Current page of the collection.',
          'type'              => 'integer',
-         'validate_callback' => 'is_numeric',
+         'validate_callback' => function( $param, $request, $key ) {
+           return is_numeric( $param );
+          },
          'sanitize_callback' => 'absint',
        ),
        'exclude' =>  array(
          'description'       => 'Exclude an item from the collection.',
          'type'              => 'integer',
-         'validate_callback' => 'is_numeric',
+         'validate_callback' => function( $param, $request, $key ) {
+           return is_numeric( $param );
+          },
          'sanitize_callback' => 'absint',
        ),
        'order' =>  array(
          'description'       => 'Change order of the collection.',
          'type'              => 'string',
+         'validate_callback' => function($param, $request, $key) {
+             return is_string( $param );
+           },
          'sanitize_callback' => 'sanitize_text_field',
        ),
        'orderby' =>  array(
          'description'       => 'Change how the collection is ordered.',
          'type'              => 'string',
+         'validate_callback' => function($param, $request, $key) {
+             return is_string( $param );
+           },
          'sanitize_callback' => 'sanitize_text_field',
        ),
      ),
