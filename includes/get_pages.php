@@ -35,6 +35,11 @@ function bwe_get_pages( WP_REST_Request $request ) {
 
   // The Loop
   if( $query->have_posts() ){
+
+    // For Headers
+    $total = $query->found_posts;
+    $total_pages = $query->max_num_pages;
+
     while( $query->have_posts() ) {
       $query->the_post();
 
@@ -101,7 +106,12 @@ function bwe_get_pages( WP_REST_Request $request ) {
     }
 
     // return the pages array
-    return $pages;
+    $response = rest_ensure_response( $pages );
+    $response->header( 'X-WP-Total', (int) $total );
+    $response->header( 'X-WP-TotalPages', (int) $total_pages );
+
+    return $response;
+
   } else {
 
     // return the empty pages array if no posts

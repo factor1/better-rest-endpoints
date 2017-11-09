@@ -46,6 +46,11 @@ function bwe_build_cpt_endpoints() {
 
             // The Loop
             if ( $query->have_posts() ) {
+
+              // For Headers
+              $total = $query->found_posts;
+              $pages = $query->max_num_pages;
+
             	while ( $query->have_posts() ) {
             		$query->the_post();
 
@@ -111,7 +116,11 @@ function bwe_build_cpt_endpoints() {
             	}
 
               // return the post array
-              return $posts;
+              $response = rest_ensure_response( $posts );
+              $response->header( 'X-WP-Total', (int) $total );
+              $response->header( 'X-WP-TotalPages', (int) $pages );
+
+              return $response;
 
             } else {
               // return empty posts array if no posts

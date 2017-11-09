@@ -36,6 +36,10 @@ function bwe_get_posts( WP_REST_Request $request ) {
   	while ( $query->have_posts() ) {
   		$query->the_post();
 
+      // For Headers
+      $total = $query->found_posts;
+      $pages = $query->max_num_pages;
+
       // better wordpress endpoint post object
       $bwe_post = new stdClass();
 
@@ -125,7 +129,10 @@ function bwe_get_posts( WP_REST_Request $request ) {
   	}
 
     // return the post array
-    return $posts;
+    $response = rest_ensure_response( $posts );
+    $response->header( 'X-WP-Total', (int) $total );
+    $response->header( 'X-WP-TotalPages', (int) $pages );
+    return $response;
 
   } else {
     // return empty posts array if no posts
