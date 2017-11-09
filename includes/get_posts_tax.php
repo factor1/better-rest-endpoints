@@ -55,6 +55,10 @@ function bwe_build_custom_tax_endpoint() {
 
               if( $query->have_posts() ){
 
+                // For Headers
+                $total = $query->found_posts;
+                $pages = $query->max_num_pages;
+
                 // setup post object
                 $bwe_tax_posts = array();
 
@@ -120,8 +124,12 @@ function bwe_build_custom_tax_endpoint() {
                   array_push($bwe_tax_posts, $bwe_tax_post);
 
                 }
-                // return the post array 
-                return $bwe_tax_posts;
+                // return the post array
+                $response = rest_ensure_response( $bwe_tax_posts );
+                $response->header( 'X-WP-Total', (int) $total );
+                $response->header( 'X-WP-TotalPages', (int) $pages );
+
+                return $response;
 
               } else {
                 // if no post is found
