@@ -42,14 +42,15 @@ function bwe_build_custom_tax_endpoint() {
               $args = array(
                 'nopaging'               => false,
               	'posts_per_page'         => $posts_per_page,
-                'orderby'                => $orderby
+                'paged'                  => $page,
                 'tax_query' => array(
                   array(
                     'taxonomy' => $tax,
                     'terms'    => $tax_term,
                     'field'    => 'slug'
                   )
-                )
+                ),
+                'orderby'                => $orderby
               );
 
               // The Query
@@ -141,7 +142,47 @@ function bwe_build_custom_tax_endpoint() {
               // reset post data
               wp_reset_postdata();
 
-            }
+            },
+            'args' => array(
+              'per_page' => array(
+                'description'       => 'Maxiumum number of items to show per page.',
+                'type'              => 'integer',
+                'validate_callback' => function( $param, $request, $key ) {
+                  return is_numeric( $param );
+                 },
+                'sanitize_callback' => 'absint',
+              ),
+              'page' =>  array(
+                'description'       => 'Current page of the collection.',
+                'type'              => 'integer',
+                'validate_callback' => function( $param, $request, $key ) {
+                  return is_numeric( $param );
+                 },
+                'sanitize_callback' => 'absint'
+              ),
+              'content' =>  array(
+                'description'       => 'Hide or show the_content from the collection.',
+                'type'              => 'boolean',
+                'validate_callback' => function( $param, $request, $key ) {
+
+                  if ( $param == 'true' || $param == 'TRUE' ) {
+                    $param = true;
+                  } else if( $param == 'false' || $param == 'FALSE') {
+                    $param = false;
+                  }
+
+                  return is_bool( $param );
+                 }
+              ),
+              'orderby' =>  array(
+                'description'       => 'The sort order of the collection.',
+                'type'              => 'string',
+                'validate_callback' => function($param, $request, $key) {
+                    return is_string( $param );
+                  },
+                'sanitize_callback' => 'sanitize_text_field'
+              ),
+            ),
         ));
       }
 
