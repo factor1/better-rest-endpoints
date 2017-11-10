@@ -158,6 +158,7 @@ Gets posts from a taxonomy term. Accepts rthe following parameters:
 - per_page (int)
 - page (int)
 - content (boolean - setting to false omits `the_content` from being returned)
+- orderby (string) - see the [codex](https://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters) for options, currently does not support multiple values
 
 Returns the following JSON Response:
 

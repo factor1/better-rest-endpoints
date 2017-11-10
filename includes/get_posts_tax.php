@@ -36,11 +36,13 @@ function bwe_build_custom_tax_endpoint() {
             $posts_per_page = $request['per_page']?: '10';
             $page = $request['page']?: '1';
             $show_content = $request['content']?: 'true';
+            $orderby = $request['orderby']? : null;
 
               // WP_Query Arguments
               $args = array(
                 'nopaging'               => false,
               	'posts_per_page'         => $posts_per_page,
+                'orderby'                => $orderby
                 'tax_query' => array(
                   array(
                     'taxonomy' => $tax,
