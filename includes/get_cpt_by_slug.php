@@ -30,7 +30,7 @@ function bwe_build_single_cpt_endpoints_slug() {
             // WP_Query Arguments
             $args = array(
               'post_type'     => $cpt,
-              'p'             => $post_slug,
+              'name'             => $post_slug,
             );
 
             // The Query
