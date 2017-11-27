@@ -3,7 +3,7 @@
 Plugin Name:  Better WordPress Endpoints
 Plugin URI:   https://github.com/factor1/better-wp-endpoints/
 Description:  Serves up slimmer WordPress Rest API endpoints, with some great enhancements.
-Version:      0.1.15
+Version:      0.1.16
 Author:       Eric Stout, Factor1 Studios
 Author URI:   https://factor1studios.com/
 License:      GPL3
@@ -106,6 +106,9 @@ class F1_Better_WP_Endpoints {
 
 		// get custom taxonomies post endpoints
 		include_once self::$plugin_dir . 'includes/get_posts_tax.php';
+
+		// get search endpoint
+		include_once self::$plugin_dir . 'includes/get_search.php';
 	}
 
 }

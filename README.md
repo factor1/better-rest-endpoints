@@ -188,3 +188,29 @@ Returns the following JSON Response in each item object:
 - description
 - classes (array)
 - menu item parent
+
+### Search
+**`better-wp-endpoints/v1/search`**
+Gets a collection of posts and pages based on the search parameter. Accepts the following parameters:
+
+- page (int)
+- per_page (int)
+- category id (int)
+- tag id  (int)
+- content (boolean) set to false to omit content from showing in JSON response
+- search (string | required)
+
+It returns a JSON response with the following (returns an empty array if no posts found):
+- id
+- slug
+- title
+- date (ISO 8601)
+- excerpt
+- content
+- all possible thumbnail sizes & URL
+- Author & Author ID
+- Categories
+- Category IDs
+- Tags
+- Tag IDs
+- ACF fields, if applicable
