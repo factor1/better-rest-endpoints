@@ -12,6 +12,8 @@ Gets a collection of posts. Accepts the following parameters:
 - category id (int)
 - tag id  (int)
 - content (boolean) set to false to omit content from showing in JSON response
+- orderby (string)
+- order (string - 'ASC' vs 'DESC')
 
 It returns a JSON response with the following:
 - id

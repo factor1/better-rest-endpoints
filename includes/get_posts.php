@@ -15,6 +15,8 @@ function bwe_get_posts( WP_REST_Request $request ) {
   $category = $request['category']?: null;
   $tag = $request['tag']?: null;
   $show_content = $request['content']?: true;
+  $orderby = $request['orderby']?: null;
+  $order = $request['order']?: null;
 
   // WP_Query arguments
   $args = array(
@@ -23,6 +25,8 @@ function bwe_get_posts( WP_REST_Request $request ) {
     'paged'                  => $page,
     'cat'                    => $category,
     'tag_id'                 => $tag,
+    'order'                  => $order?:'DESC',
+    'orderby'                => $orderby?:'date'
   );
 
   // The Query
@@ -198,6 +202,22 @@ add_action( 'rest_api_init', function () {
 
           return is_bool( $param );
          }
+      ),
+      'order' =>  array(
+        'description'       => 'Change order of the collection.',
+        'type'              => 'string',
+        'validate_callback' => function($param, $request, $key) {
+            return is_string( $param );
+          },
+        'sanitize_callback' => 'sanitize_text_field',
+      ),
+      'orderby' =>  array(
+        'description'       => 'Change how the collection is ordered.',
+        'type'              => 'string',
+        'validate_callback' => function($param, $request, $key) {
+            return is_string( $param );
+          },
+        'sanitize_callback' => 'sanitize_text_field',
       ),
     ),
   ) );
