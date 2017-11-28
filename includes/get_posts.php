@@ -17,6 +17,7 @@ function bwe_get_posts( WP_REST_Request $request ) {
   $show_content = $request['content']?: true;
   $orderby = $request['orderby']?: null;
   $order = $request['order']?: null;
+  $exclude = $request['exclude']?: null;
 
   // WP_Query arguments
   $args = array(
@@ -26,7 +27,8 @@ function bwe_get_posts( WP_REST_Request $request ) {
     'cat'                    => $category,
     'tag_id'                 => $tag,
     'order'                  => $order?:'DESC',
-    'orderby'                => $orderby?:'date'
+    'orderby'                => $orderby?:'date',
+    'post__not_in'           => array($exclude)
   );
 
   // The Query

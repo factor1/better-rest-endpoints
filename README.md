@@ -14,6 +14,7 @@ Gets a collection of posts. Accepts the following parameters:
 - content (boolean) set to false to omit content from showing in JSON response
 - orderby (string)
 - order (string - 'ASC' vs 'DESC')
+- exclude (int) a post ID to exclude from the response
 
 It returns a JSON response with the following:
 - id
