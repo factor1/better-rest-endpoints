@@ -32,6 +32,7 @@ function get_post_by_id( $data ) {
       $bwe_post->content = apply_filters('the_content', get_the_content());
       $bwe_post->author = esc_html__(get_the_author(), 'text_domain');
       $bwe_post->author_id = get_the_author_meta('ID');
+      $bwe_post->author_nicename = get_the_author_meta('user_nicename');
 
       /*
        *

@@ -24,7 +24,7 @@ It returns a JSON response with the following:
 - excerpt
 - content
 - all possible thumbnail sizes & URL
-- Author & Author ID
+- Author, user_nicename, & Author ID
 - Categories
 - Category IDs
 - Tags
@@ -48,7 +48,7 @@ Returns a JSON response with the following:
 - excerpt
 - content
 - all possible thumbnail sizes & URLs
-- Author & Author ID
+- Author, user_nicename, & Author ID
 - Categories
 - Category IDs
 - Tags
@@ -113,7 +113,7 @@ Returns the following JSON response:
 - excerpt
 - content
 - all possible thumbnail sizes & URLs
-- Author & Author ID
+- Author, user_nicename, & Author ID
 - ACF fields if applicable
 
 ### Custom Post Type Post by ID
@@ -132,7 +132,7 @@ Returns the following JSON Response:
 - excerpt
 - content
 - all possible thumbnail sizes & URLs
-- Author & Author ID
+- Author, user_nicename, & Author ID
 - ACF Fields, if applicable
 
 ### Custom Post Type Post by Slug
@@ -151,7 +151,7 @@ Returns the following JSON Response:
 - excerpt
 - content
 - all possible thumbnail sizes & URLs
-- Author & Author ID
+- Author, user_nicename, & Author ID
 - ACF Fields, if applicable
 
 ### Get Posts Belonging To A Taxonomy Term
@@ -173,7 +173,7 @@ Returns the following JSON Response:
 - excerpt
 - content
 - all possible thumbnail sizes & URLs
-- Author & Author ID
+- Author, user_nicename, & Author ID
 - ACF Fields, if applicable
 
 ### Menus
@@ -211,7 +211,7 @@ It returns a JSON response with the following (returns an empty array if no post
 - excerpt
 - content
 - all possible thumbnail sizes & URL
-- Author & Author ID
+- Author, user_nicename, & Author ID
 - Categories
 - Category IDs
 - Tags
