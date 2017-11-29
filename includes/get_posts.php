@@ -18,6 +18,7 @@ function bwe_get_posts( WP_REST_Request $request ) {
   $orderby = $request['orderby']?: null;
   $order = $request['order']?: null;
   $exclude = $request['exclude']?: null;
+  $author = $request['author']?: null;
 
   // WP_Query arguments
   $args = array(
@@ -28,7 +29,8 @@ function bwe_get_posts( WP_REST_Request $request ) {
     'tag_id'                 => $tag,
     'order'                  => $order?:'DESC',
     'orderby'                => $orderby?:'date',
-    'post__not_in'           => array($exclude)
+    'post__not_in'           => array($exclude),
+    'author_name'            => $author
   );
 
   // The Query
@@ -216,6 +218,14 @@ add_action( 'rest_api_init', function () {
       ),
       'orderby' =>  array(
         'description'       => 'Change how the collection is ordered.',
+        'type'              => 'string',
+        'validate_callback' => function($param, $request, $key) {
+            return is_string( $param );
+          },
+        'sanitize_callback' => 'sanitize_text_field',
+      ),
+      'author' =>  array(
+        'description'       => 'Query the collection by author.',
         'type'              => 'string',
         'validate_callback' => function($param, $request, $key) {
             return is_string( $param );
