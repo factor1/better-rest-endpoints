@@ -15,6 +15,7 @@ Gets a collection of posts. Accepts the following parameters:
 - orderby (string)
 - order (string - 'ASC' vs 'DESC')
 - exclude (int) a post ID to exclude from the response
+- author (string) limit posts by author nice name (user_nicename)
 
 It returns a JSON response with the following:
 - id
