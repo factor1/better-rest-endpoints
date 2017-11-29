@@ -59,6 +59,7 @@ function bwe_get_search( WP_REST_Request $request ) {
 
       $bwe_post->author = esc_html__(get_the_author(), 'text_domain');
       $bwe_post->author_id = get_the_author_meta('ID');
+      $bwe_post->author_nicename = get_the_author_meta('user_nicename');
 
       /*
        *
