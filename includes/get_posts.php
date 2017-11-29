@@ -18,7 +18,7 @@ function bwe_get_posts( WP_REST_Request $request ) {
   $orderby = $request['orderby']?: null;
   $order = $request['order']?: null;
   $exclude = $request['exclude']?: null;
-  $author = $request['author']?: null;
+  $author = $request['author']?: '';
 
   // WP_Query arguments
   $args = array(
