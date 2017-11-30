@@ -10,6 +10,7 @@ Gets a collection of posts. Accepts the following parameters:
 - page (int)
 - per_page (int)
 - category id (int)
+- category_name (string)
 - tag id  (int)
 - content (boolean) set to false to omit content from showing in JSON response
 - orderby (string)
