@@ -13,6 +13,7 @@ function bwe_get_posts( WP_REST_Request $request ) {
   $posts_per_page = $request['per_page']?: '10';
   $page = $request['page']?: '1';
   $category = $request['category']?: null;
+  $category_name = $request['category_name']?: '';
   $tag = $request['tag']?: null;
   $show_content = $request['content']?: true;
   $orderby = $request['orderby']?: null;
@@ -26,6 +27,7 @@ function bwe_get_posts( WP_REST_Request $request ) {
   	'posts_per_page'         => $posts_per_page,
     'paged'                  => $page,
     'cat'                    => $category,
+    'category_name'          => $category_name,
     'tag_id'                 => $tag,
     'order'                  => $order?:'DESC',
     'orderby'                => $orderby?:'date',
@@ -226,6 +228,14 @@ add_action( 'rest_api_init', function () {
       ),
       'author' =>  array(
         'description'       => 'Query the collection by author.',
+        'type'              => 'string',
+        'validate_callback' => function($param, $request, $key) {
+            return is_string( $param );
+          },
+        'sanitize_callback' => 'sanitize_text_field',
+      ),
+      'category_name' =>  array(
+        'description'       => 'Query the collection by category slug.',
         'type'              => 'string',
         'validate_callback' => function($param, $request, $key) {
             return is_string( $param );
