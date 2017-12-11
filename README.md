@@ -74,6 +74,7 @@ Returns the following JSON Response:
 - Slug
 - Template Name
 - Title
+- Parent Slug (false if none)
 - Content
 - ACF Fields
 - all possible thumbnail sizes & URLs
@@ -92,6 +93,7 @@ Returns a JSON response with the following:
 - slug
 - title
 - template name
+- Parent Slug (false if none)
 - content
 - all possible thumbnail sizes & URLs
 - ACF fields, if applicable
