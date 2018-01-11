@@ -37,6 +37,7 @@ function bwe_build_custom_tax_endpoint() {
             $page = $request['page']?: '1';
             $show_content = $request['content']?: 'true';
             $orderby = $request['orderby']? : null;
+            $exclude = $request['exclude']?: null;
 
               // WP_Query Arguments
               $args = array(
@@ -50,7 +51,8 @@ function bwe_build_custom_tax_endpoint() {
                     'field'    => 'slug'
                   )
                 ),
-                'orderby'                => $orderby
+                'orderby'                => $orderby,
+                'post__not_in'           => array($exclude)
               );
 
               // The Query
@@ -182,6 +184,14 @@ function bwe_build_custom_tax_endpoint() {
                     return is_string( $param );
                   },
                 'sanitize_callback' => 'sanitize_text_field'
+              ),
+              'exclude' =>  array(
+                'description'       => 'Exclude a post by ID.',
+                'type'              => 'integer',
+                'validate_callback' => function( $param, $request, $key ) {
+                  return is_numeric( $param );
+                 },
+                'sanitize_callback' => 'absint'
               ),
             ),
         ));

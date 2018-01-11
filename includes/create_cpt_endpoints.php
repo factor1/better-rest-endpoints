@@ -28,6 +28,7 @@ function bwe_build_cpt_endpoints() {
             $page = $request['page']?: '1';
             $show_content = $request['content']?: 'true';
             $orderby = $request['orderby']? : null;
+            $exclude = $request['exclude']?: null;
 
             // WP_Query arguments
             $args = array(
@@ -35,6 +36,7 @@ function bwe_build_cpt_endpoints() {
             	'nopaging'               => false,
             	'posts_per_page'         => $posts_per_page,
               'paged'                  => $page,
+              'post__not_in'           => array($exclude),
               'orderby'                => $orderby
             );
 
@@ -169,6 +171,14 @@ function bwe_build_cpt_endpoints() {
                   return is_string( $param );
                 },
               'sanitize_callback' => 'sanitize_text_field'
+            ),
+            'exclude' =>  array(
+              'description'       => 'Exclude a post by ID.',
+              'type'              => 'integer',
+              'validate_callback' => function( $param, $request, $key ) {
+                return is_numeric( $param );
+               },
+              'sanitize_callback' => 'absint'
             ),
           ),
         ) );

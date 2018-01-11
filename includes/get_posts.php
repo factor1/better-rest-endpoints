@@ -196,6 +196,14 @@ add_action( 'rest_api_init', function () {
          },
         'sanitize_callback' => 'absint'
       ),
+      'exclude' =>  array(
+        'description'       => 'Exclude a post by ID.',
+        'type'              => 'integer',
+        'validate_callback' => function( $param, $request, $key ) {
+          return is_numeric( $param );
+         },
+        'sanitize_callback' => 'absint'
+      ),
       'content' =>  array(
         'description'       => 'Hide or show the_content from the collection.',
         'type'              => 'boolean',
