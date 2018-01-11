@@ -83,6 +83,7 @@ function bwe_build_custom_tax_endpoint() {
 
                   $bwe_tax_post->author = esc_html__(get_the_author(), 'text_domain');
                   $bwe_tax_post->author_id = get_the_author_meta('ID');
+                  $bwe_tax_post->author_nicename = get_the_author_meta('user_nicename');
 
                   /*
                    *

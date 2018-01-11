@@ -13,11 +13,13 @@ function bwe_get_posts( WP_REST_Request $request ) {
   $posts_per_page = $request['per_page']?: '10';
   $page = $request['page']?: '1';
   $category = $request['category']?: null;
+  $category_name = $request['category_name']?: '';
   $tag = $request['tag']?: null;
   $show_content = $request['content']?: true;
   $orderby = $request['orderby']?: null;
   $order = $request['order']?: null;
   $exclude = $request['exclude']?: null;
+  $author = $request['author']?: '';
 
   // WP_Query arguments
   $args = array(
@@ -25,10 +27,12 @@ function bwe_get_posts( WP_REST_Request $request ) {
   	'posts_per_page'         => $posts_per_page,
     'paged'                  => $page,
     'cat'                    => $category,
+    'category_name'          => $category_name,
     'tag_id'                 => $tag,
     'order'                  => $order?:'DESC',
     'orderby'                => $orderby?:'date',
-    'post__not_in'           => array($exclude)
+    'post__not_in'           => array($exclude),
+    'author_name'            => $author
   );
 
   // The Query
@@ -63,6 +67,7 @@ function bwe_get_posts( WP_REST_Request $request ) {
 
       $bwe_post->author = esc_html__(get_the_author(), 'text_domain');
       $bwe_post->author_id = get_the_author_meta('ID');
+      $bwe_post->author_nicename = get_the_author_meta('user_nicename');
 
       /*
        *
@@ -215,6 +220,22 @@ add_action( 'rest_api_init', function () {
       ),
       'orderby' =>  array(
         'description'       => 'Change how the collection is ordered.',
+        'type'              => 'string',
+        'validate_callback' => function($param, $request, $key) {
+            return is_string( $param );
+          },
+        'sanitize_callback' => 'sanitize_text_field',
+      ),
+      'author' =>  array(
+        'description'       => 'Query the collection by author.',
+        'type'              => 'string',
+        'validate_callback' => function($param, $request, $key) {
+            return is_string( $param );
+          },
+        'sanitize_callback' => 'sanitize_text_field',
+      ),
+      'category_name' =>  array(
+        'description'       => 'Query the collection by category slug.',
         'type'              => 'string',
         'validate_callback' => function($param, $request, $key) {
             return is_string( $param );

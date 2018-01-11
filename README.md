@@ -10,11 +10,13 @@ Gets a collection of posts. Accepts the following parameters:
 - page (int)
 - per_page (int)
 - category id (int)
+- category_name (string)
 - tag id  (int)
 - content (boolean) set to false to omit content from showing in JSON response
 - orderby (string)
 - order (string - 'ASC' vs 'DESC')
 - exclude (int) a post ID to exclude from the response
+- author (string) limit posts by author nice name (user_nicename)
 
 It returns a JSON response with the following:
 - id
@@ -24,7 +26,7 @@ It returns a JSON response with the following:
 - excerpt
 - content
 - all possible thumbnail sizes & URL
-- Author & Author ID
+- Author, user_nicename, & Author ID
 - Categories
 - Category IDs
 - Tags
@@ -48,7 +50,7 @@ Returns a JSON response with the following:
 - excerpt
 - content
 - all possible thumbnail sizes & URLs
-- Author & Author ID
+- Author, user_nicename, & Author ID
 - Categories
 - Category IDs
 - Tags
@@ -113,7 +115,7 @@ Returns the following JSON response:
 - excerpt
 - content
 - all possible thumbnail sizes & URLs
-- Author & Author ID
+- Author, user_nicename, & Author ID
 - ACF fields if applicable
 
 ### Custom Post Type Post by ID
@@ -132,7 +134,7 @@ Returns the following JSON Response:
 - excerpt
 - content
 - all possible thumbnail sizes & URLs
-- Author & Author ID
+- Author, user_nicename, & Author ID
 - ACF Fields, if applicable
 
 ### Custom Post Type Post by Slug
@@ -151,7 +153,7 @@ Returns the following JSON Response:
 - excerpt
 - content
 - all possible thumbnail sizes & URLs
-- Author & Author ID
+- Author, user_nicename, & Author ID
 - ACF Fields, if applicable
 
 ### Get Posts Belonging To A Taxonomy Term
@@ -173,7 +175,7 @@ Returns the following JSON Response:
 - excerpt
 - content
 - all possible thumbnail sizes & URLs
-- Author & Author ID
+- Author, user_nicename, & Author ID
 - ACF Fields, if applicable
 
 ### Menus
@@ -211,7 +213,7 @@ It returns a JSON response with the following (returns an empty array if no post
 - excerpt
 - content
 - all possible thumbnail sizes & URL
-- Author & Author ID
+- Author, user_nicename, & Author ID
 - Categories
 - Category IDs
 - Tags

@@ -43,6 +43,8 @@ function bwe_get_pages( WP_REST_Request $request ) {
     while( $query->have_posts() ) {
       $query->the_post();
 
+      global $post;
+
       // better wordpress endpoint page object
       $bwe_page = new stdClass();
 
@@ -69,6 +71,18 @@ function bwe_get_pages( WP_REST_Request $request ) {
       } else {
         $bwe_page->template = 'default';
       }
+
+      /*
+       *
+       * return parent slug if it exists
+       *
+       */
+      $parents = get_post_ancestors( $post->ID );
+      /* Get the top Level page->ID count base 1, array base 0 so -1 */
+    	$id = ($parents) ? $parents[count($parents)-1]: $post->ID;
+    	/* Get the parent and set the $class with the page slug (post_name) */
+      $parent = get_post( $id );
+    	$bwe_page->parent = $parent->post_name != $post->post_name ? $parent->post_name : false;
 
 
       // show post content unless parameter is false
