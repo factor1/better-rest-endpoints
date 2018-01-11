@@ -197,6 +197,17 @@ Returns the following JSON Response in each item object:
 - classes (array)
 - menu item parent
 
+### Taxonomies
+**`better-wp-endpoints/v1/taxonomies`**
+Gets a list of taxonomies used by WordPress. Accepts no parameters.
+
+Returns the following JSON response in each item object:
+
+- Name
+- Slug
+- Description
+- Hierarchical (true/false)
+
 ### Search
 **`better-wp-endpoints/v1/search`**
 Gets a collection of posts and pages based on the search parameter. Accepts the following parameters:
