@@ -15,7 +15,8 @@ function bwe_get_posts( WP_REST_Request $request ) {
   $category = $request['category']?: null;
   $category_name = $request['category_name']?: '';
   $tag = $request['tag']?: null;
-  $show_content = $request['content']?: true;
+  $content = $request['content'];
+  $show_content = filter_var($content, FILTER_VALIDATE_BOOLEAN);
   $orderby = $request['orderby']?: null;
   $order = $request['order']?: null;
   $exclude = $request['exclude']?: null;
@@ -61,7 +62,7 @@ function bwe_get_posts( WP_REST_Request $request ) {
       $bwe_post->excerpt = get_the_excerpt();
 
       // show post content unless parameter is false
-      if( $show_content == true ) {
+      if( $content === null || $show_content === true ) {
         $bwe_post->content = apply_filters('the_content', get_the_content());
       }
 
@@ -210,12 +211,14 @@ add_action( 'rest_api_init', function () {
         'validate_callback' => function( $param, $request, $key ) {
 
           if ( $param == 'true' || $param == 'TRUE' ) {
-            $param = true;
+            // $param = true;
+            $status = true;
           } else if( $param == 'false' || $param == 'FALSE') {
-            $param = false;
+            //$param = false;
+            $status = false;
           }
 
-          return is_bool( $param );
+          return is_bool( $status );
          }
       ),
       'order' =>  array(
