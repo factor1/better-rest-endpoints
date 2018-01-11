@@ -109,6 +109,9 @@ class F1_Better_WP_Endpoints {
 
 		// get search endpoint
 		include_once self::$plugin_dir . 'includes/get_search.php';
+
+		// get taxonomies endpoint
+		include_once self::$plugin_dir . 'includes/get_taxonomies.php';
 	}
 
 }
