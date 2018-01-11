@@ -13,8 +13,6 @@ function bwe_build_custom_tax_endpoint() {
     // store the custom tax collections we have
     $custom_tax_collection = bwe_get_custom_tax();
 
-    //print_r($custom_tax_collection);
-
     foreach ($custom_tax_collection as $key => $tax) {
 
       $tax_terms = get_terms(array(
