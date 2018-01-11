@@ -67,6 +67,7 @@ Gets a collection of pages. Accepts the following parameters:
 - per_page (int)
 - page (int)
 - content (boolean - setting to false hides the content from the response)
+- exclude (int) a post ID to exclude from the response
 
 Returns the following JSON Response:
 
