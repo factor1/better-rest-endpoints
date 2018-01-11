@@ -98,7 +98,7 @@ function get_page_by_id( WP_REST_Request $request ){
 }
 
 add_action( 'rest_api_init', function () {
-  register_rest_route( 'better-wp-endpoints/v1', '/page/(?P<id>\d+)', array(
+  register_rest_route( 'better-rest-endpoints/v1', '/page/(?P<id>\d+)', array(
     'methods' => 'GET',
     'callback' => 'get_page_by_id',
   ) );

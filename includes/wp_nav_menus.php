@@ -46,7 +46,7 @@ function bwe_get_menus() {
      *
      */
 
-      register_rest_route( 'better-wp-endpoints/v1', '/menus/'.$menu->slug.'/', array(
+      register_rest_route( 'better-rest-endpoints/v1', '/menus/'.$menu->slug.'/', array(
         'methods' => 'GET',
         'callback' => function ( WP_REST_Request $request ) use($slim_menu_items) {
           return $slim_menu_items;

@@ -13,8 +13,6 @@ function bwe_build_custom_tax_endpoint() {
     // store the custom tax collections we have
     $custom_tax_collection = bwe_get_custom_tax();
 
-    //print_r($custom_tax_collection);
-
     foreach ($custom_tax_collection as $key => $tax) {
 
       $tax_terms = get_terms(array(
@@ -28,15 +26,18 @@ function bwe_build_custom_tax_endpoint() {
          * Register Rest API Endpoint
          *
          */
-        register_rest_route( 'better-wp-endpoints/v1', '/'.$tax.'/'.$tax_term->slug.'/', array(
+        register_rest_route( 'better-rest-endpoints/v1', '/'.$tax.'/'.$tax_term->slug.'/', array(
           'methods' => 'GET',
           'callback' => function ( WP_REST_Request $request ) use ($tax, $tax_term) {
 
             // check for params
             $posts_per_page = $request['per_page']?: '10';
             $page = $request['page']?: '1';
-            $show_content = $request['content']?: 'true';
-            $orderby = $request['orderby']? : null;
+            $content = $request['content'];
+            $show_content = filter_var($content, FILTER_VALIDATE_BOOLEAN);
+            $orderby = $request['orderby']?: null;
+            $order = $request['order']?: null;
+            $exclude = $request['exclude']?: null;
 
               // WP_Query Arguments
               $args = array(
@@ -50,7 +51,9 @@ function bwe_build_custom_tax_endpoint() {
                     'field'    => 'slug'
                   )
                 ),
-                'orderby'                => $orderby
+                'order'                  => $order?:'DESC',
+                'orderby'                => $orderby?:'date',
+                'post__not_in'           => array($exclude)
               );
 
               // The Query
@@ -77,7 +80,7 @@ function bwe_build_custom_tax_endpoint() {
                   $bwe_tax_post->date = get_the_date('c');
                   $bwe_tax_post->excerpt = get_the_excerpt();
 
-                  if( $show_content ){
+                  if( $content === null || $show_content === true ){
                     $bwe_tax_post->content = apply_filters('the_content', get_the_content());
                   }
 
@@ -175,6 +178,14 @@ function bwe_build_custom_tax_endpoint() {
                   return is_bool( $param );
                  }
               ),
+              'order' =>  array(
+                'description'       => 'Change order of the collection.',
+                'type'              => 'string',
+                'validate_callback' => function($param, $request, $key) {
+                    return is_string( $param );
+                  },
+                'sanitize_callback' => 'sanitize_text_field',
+              ),
               'orderby' =>  array(
                 'description'       => 'The sort order of the collection.',
                 'type'              => 'string',
@@ -182,6 +193,14 @@ function bwe_build_custom_tax_endpoint() {
                     return is_string( $param );
                   },
                 'sanitize_callback' => 'sanitize_text_field'
+              ),
+              'exclude' =>  array(
+                'description'       => 'Exclude a post by ID.',
+                'type'              => 'integer',
+                'validate_callback' => function( $param, $request, $key ) {
+                  return is_numeric( $param );
+                 },
+                'sanitize_callback' => 'absint'
               ),
             ),
         ));

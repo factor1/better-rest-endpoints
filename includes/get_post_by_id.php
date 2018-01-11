@@ -115,7 +115,7 @@ function get_post_by_id( $data ) {
 }
 
 add_action( 'rest_api_init', function () {
-  register_rest_route( 'better-wp-endpoints/v1', '/post/(?P<id>\d+)', array(
+  register_rest_route( 'better-rest-endpoints/v1', '/post/(?P<id>\d+)', array(
     'methods' => 'GET',
     'callback' => 'get_post_by_id',
   ) );

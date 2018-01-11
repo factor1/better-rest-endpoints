@@ -20,7 +20,7 @@ function bwe_build_single_cpt_endpoints_slug() {
        * Register Rest API Endpoint
        *
        */
-      register_rest_route( 'better-wp-endpoints/v1', '/'.$cpt.'/(?P<slug>\S+)', array(
+      register_rest_route( 'better-rest-endpoints/v1', '/'.$cpt.'/(?P<slug>\S+)', array(
         'methods' => 'GET',
         'callback' => function ( WP_REST_Request $request ) use ($cpt) {
 

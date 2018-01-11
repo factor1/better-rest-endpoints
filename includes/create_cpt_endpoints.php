@@ -19,15 +19,18 @@ function bwe_build_cpt_endpoints() {
        *
        */
 
-        register_rest_route( 'better-wp-endpoints/v1', '/'.$cpt.'/', array(
+        register_rest_route( 'better-rest-endpoints/v1', '/'.$cpt.'/', array(
           'methods' => 'GET',
           'callback' => function ( WP_REST_Request $request ) use($cpt) {
 
             // check for params
             $posts_per_page = $request['per_page']?: '10';
             $page = $request['page']?: '1';
-            $show_content = $request['content']?: 'true';
-            $orderby = $request['orderby']? : null;
+            $content = $request['content'];
+            $show_content = filter_var($content, FILTER_VALIDATE_BOOLEAN);
+            $orderby = $request['orderby']?: null;
+            $order = $request['order']?: null;
+            $exclude = $request['exclude']?: null;
 
             // WP_Query arguments
             $args = array(
@@ -35,7 +38,9 @@ function bwe_build_cpt_endpoints() {
             	'nopaging'               => false,
             	'posts_per_page'         => $posts_per_page,
               'paged'                  => $page,
-              'orderby'                => $orderby
+              'post__not_in'           => array($exclude),
+              'order'                  => $order?:'DESC',
+              'orderby'                => $orderby?:'date'
             );
 
             // The Query
@@ -65,7 +70,7 @@ function bwe_build_cpt_endpoints() {
                 $bwe_post->excerpt = get_the_excerpt();
 
                 // show post content unless parameter is false
-                if( $show_content === 'true' ) {
+                if( $content === null || $show_content === true ) {
                   $bwe_post->content = apply_filters('the_content', get_the_content());
                 }
 
@@ -162,6 +167,14 @@ function bwe_build_cpt_endpoints() {
                 return is_bool( $param );
                }
             ),
+            'order' =>  array(
+              'description'       => 'Change order of the collection.',
+              'type'              => 'string',
+              'validate_callback' => function($param, $request, $key) {
+                  return is_string( $param );
+                },
+              'sanitize_callback' => 'sanitize_text_field',
+            ),
             'orderby' =>  array(
               'description'       => 'The sort order of the collection.',
               'type'              => 'string',
@@ -169,6 +182,14 @@ function bwe_build_cpt_endpoints() {
                   return is_string( $param );
                 },
               'sanitize_callback' => 'sanitize_text_field'
+            ),
+            'exclude' =>  array(
+              'description'       => 'Exclude a post by ID.',
+              'type'              => 'integer',
+              'validate_callback' => function( $param, $request, $key ) {
+                return is_numeric( $param );
+               },
+              'sanitize_callback' => 'absint'
             ),
           ),
         ) );
