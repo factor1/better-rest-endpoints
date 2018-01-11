@@ -158,12 +158,13 @@ Returns the following JSON Response:
 
 ### Get Posts Belonging To A Taxonomy Term
 **`better-wp-endpoints/v1/{taxonomy}/{term}`**
-Gets posts from a taxonomy term. Accepts rthe following parameters:
+Gets posts from a taxonomy term. Accepts the following parameters:
 
 - per_page (int)
 - page (int)
 - content (boolean - setting to false omits `the_content` from being returned)
 - orderby (string) - see the [codex](https://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters) for options, currently does not support multiple values
+- exclude (int) a post ID to exclude from the response
 
 Returns the following JSON Response:
 

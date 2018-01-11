@@ -185,6 +185,14 @@ function bwe_build_custom_tax_endpoint() {
                   },
                 'sanitize_callback' => 'sanitize_text_field'
               ),
+              'exclude' =>  array(
+                'description'       => 'Exclude a post by ID.',
+                'type'              => 'integer',
+                'validate_callback' => function( $param, $request, $key ) {
+                  return is_numeric( $param );
+                 },
+                'sanitize_callback' => 'absint'
+              ),
             ),
         ));
       }
