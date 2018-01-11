@@ -27,7 +27,8 @@ function bwe_build_cpt_endpoints() {
             $posts_per_page = $request['per_page']?: '10';
             $page = $request['page']?: '1';
             $show_content = $request['content']?: 'true';
-            $orderby = $request['orderby']? : null;
+            $orderby = $request['orderby']?: null;
+            $order = $request['order']?: null;
             $exclude = $request['exclude']?: null;
 
             // WP_Query arguments
@@ -37,7 +38,8 @@ function bwe_build_cpt_endpoints() {
             	'posts_per_page'         => $posts_per_page,
               'paged'                  => $page,
               'post__not_in'           => array($exclude),
-              'orderby'                => $orderby
+              'order'                  => $order?:'DESC',
+              'orderby'                => $orderby?:'date'
             );
 
             // The Query
@@ -163,6 +165,14 @@ function bwe_build_cpt_endpoints() {
 
                 return is_bool( $param );
                }
+            ),
+            'order' =>  array(
+              'description'       => 'Change order of the collection.',
+              'type'              => 'string',
+              'validate_callback' => function($param, $request, $key) {
+                  return is_string( $param );
+                },
+              'sanitize_callback' => 'sanitize_text_field',
             ),
             'orderby' =>  array(
               'description'       => 'The sort order of the collection.',
