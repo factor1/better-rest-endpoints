@@ -26,7 +26,8 @@ function bwe_build_cpt_endpoints() {
             // check for params
             $posts_per_page = $request['per_page']?: '10';
             $page = $request['page']?: '1';
-            $show_content = $request['content']?: 'true';
+            $content = $request['content'];
+            $show_content = filter_var($content, FILTER_VALIDATE_BOOLEAN);
             $orderby = $request['orderby']?: null;
             $order = $request['order']?: null;
             $exclude = $request['exclude']?: null;
@@ -69,7 +70,7 @@ function bwe_build_cpt_endpoints() {
                 $bwe_post->excerpt = get_the_excerpt();
 
                 // show post content unless parameter is false
-                if( $show_content === 'true' ) {
+                if( $content === null || $show_content === true ) {
                   $bwe_post->content = apply_filters('the_content', get_the_content());
                 }
 
