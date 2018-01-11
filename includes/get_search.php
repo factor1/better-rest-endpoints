@@ -14,7 +14,8 @@ function bwe_get_search( WP_REST_Request $request ) {
   $page = $request['page']?: '1';
   $category = $request['category']?: null;
   $tag = $request['tag']?: null;
-  $show_content = $request['content']?: true;
+  $content = $request['content'];
+  $show_content = filter_var($content, FILTER_VALIDATE_BOOLEAN);
   $search = $request['search']?: null;
 
   // WP_Query arguments
@@ -53,7 +54,7 @@ function bwe_get_search( WP_REST_Request $request ) {
       $bwe_post->excerpt = get_the_excerpt();
 
       // show post content unless parameter is false
-      if( $show_content == true ) {
+      if( $content === null || $show_content === true ) {
         $bwe_post->content = apply_filters('the_content', get_the_content());
       }
 
