@@ -13,7 +13,8 @@ function bwe_get_pages( WP_REST_Request $request ) {
   // check for params
   $posts_per_page = $request['per_page']?: '10';
   $page = $request['page']?: '1';
-  $show_content = $request['content']?: 'true';
+  $content = $request['content'];
+  $show_content = filter_var($content, FILTER_VALIDATE_BOOLEAN);
   $orderby = $request['orderby']?: null;
   $order = $request['order']?: null;
   $exclude = $request['exclude']?: null;
@@ -87,7 +88,7 @@ function bwe_get_pages( WP_REST_Request $request ) {
 
 
       // show post content unless parameter is false
-      if( $show_content === 'true' ) {
+      if( $content === null || $show_content === true ) {
         $bwe_page->content = apply_filters('the_content', get_the_content());
       }
 
@@ -186,6 +187,22 @@ function bwe_get_pages( WP_REST_Request $request ) {
              return is_string( $param );
            },
          'sanitize_callback' => 'sanitize_text_field',
+       ),
+       'content' =>  array(
+         'description'       => 'Hide or show the_content from the collection.',
+         'type'              => 'boolean',
+         'validate_callback' => function( $param, $request, $key ) {
+
+           if ( $param == 'true' || $param == 'TRUE' ) {
+             // $param = true;
+             $status = true;
+           } else if( $param == 'false' || $param == 'FALSE') {
+             //$param = false;
+             $status = false;
+           }
+
+           return is_bool( $status );
+          }
        ),
      ),
    ) );
