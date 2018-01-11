@@ -33,7 +33,8 @@ function bwe_build_custom_tax_endpoint() {
             // check for params
             $posts_per_page = $request['per_page']?: '10';
             $page = $request['page']?: '1';
-            $show_content = $request['content']?: 'true';
+            $content = $request['content'];
+            $show_content = filter_var($content, FILTER_VALIDATE_BOOLEAN);
             $orderby = $request['orderby']?: null;
             $order = $request['order']?: null;
             $exclude = $request['exclude']?: null;
@@ -79,7 +80,7 @@ function bwe_build_custom_tax_endpoint() {
                   $bwe_tax_post->date = get_the_date('c');
                   $bwe_tax_post->excerpt = get_the_excerpt();
 
-                  if( $show_content ){
+                  if( $content === null || $show_content === true ){
                     $bwe_tax_post->content = apply_filters('the_content', get_the_content());
                   }
 
