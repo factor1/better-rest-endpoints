@@ -37,6 +37,7 @@ function bwe_build_custom_tax_endpoint() {
             $page = $request['page']?: '1';
             $show_content = $request['content']?: 'true';
             $orderby = $request['orderby']? : null;
+            $exclude = $request['exclude']?: null;
 
               // WP_Query Arguments
               $args = array(
@@ -50,7 +51,8 @@ function bwe_build_custom_tax_endpoint() {
                     'field'    => 'slug'
                   )
                 ),
-                'orderby'                => $orderby
+                'orderby'                => $orderby,
+                'post__not_in'           => array($exclude)
               );
 
               // The Query
