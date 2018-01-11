@@ -144,7 +144,7 @@ function bwe_get_pages( WP_REST_Request $request ) {
   *
   */
  add_action( 'rest_api_init', function () {
-   register_rest_route( 'better-wp-endpoints/v1', '/pages/', array(
+   register_rest_route( 'better-rest-endpoints/v1', '/pages/', array(
      'methods' => 'GET',
      'callback' => 'bwe_get_pages',
      'args' => array(

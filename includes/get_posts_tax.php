@@ -26,7 +26,7 @@ function bwe_build_custom_tax_endpoint() {
          * Register Rest API Endpoint
          *
          */
-        register_rest_route( 'better-wp-endpoints/v1', '/'.$tax.'/'.$tax_term->slug.'/', array(
+        register_rest_route( 'better-rest-endpoints/v1', '/'.$tax.'/'.$tax_term->slug.'/', array(
           'methods' => 'GET',
           'callback' => function ( WP_REST_Request $request ) use ($tax, $tax_term) {
 

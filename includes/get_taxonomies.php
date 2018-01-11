@@ -34,7 +34,7 @@ function bwe_get_taxonomies() {
    *
    */
 
-  register_rest_route( 'better-wp-endpoints/v1', '/taxonomies/', array(
+  register_rest_route( 'better-rest-endpoints/v1', '/taxonomies/', array(
     'methods' => 'GET',
     'callback' => function ( WP_REST_Request $request ) use($bwe_taxonomies) {
       return $bwe_taxonomies;

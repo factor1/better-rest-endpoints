@@ -19,7 +19,7 @@ function bwe_build_cpt_endpoints() {
        *
        */
 
-        register_rest_route( 'better-wp-endpoints/v1', '/'.$cpt.'/', array(
+        register_rest_route( 'better-rest-endpoints/v1', '/'.$cpt.'/', array(
           'methods' => 'GET',
           'callback' => function ( WP_REST_Request $request ) use($cpt) {
 

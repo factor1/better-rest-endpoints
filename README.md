@@ -1,10 +1,10 @@
-# better-wp-endpoints
+# better-rest-endpoints
 A WordPress plugin that serves up slimmer WP Rest API endpoints - WIP
 
 ## Endpoints
 
 ### Posts
-**`better-wp-endpoints/v1/posts`**
+**`better-rest-endpoints/v1/posts`**
 Gets a collection of posts. Accepts the following parameters:
 
 - page (int)
@@ -34,7 +34,7 @@ It returns a JSON response with the following:
 - ACF fields, if applicable
 
 ### Post
-**`better-wp-endpoints/v1/post/{id}`**
+**`better-rest-endpoints/v1/post/{id}`**
 Get a post by ID.
 
 Accepts the following parameters:
@@ -58,7 +58,7 @@ Returns a JSON response with the following:
 - ACF fields, if applicable
 
 ### Pages
-**`better-wp-endpoints/v1/pages`**
+**`better-rest-endpoints/v1/pages`**
 Gets a collection of pages. Accepts the following parameters:
 
 - exclude (int)
@@ -80,7 +80,7 @@ Returns the following JSON Response:
 - all possible thumbnail sizes & URLs
 
 ### Page by ID
-**`better-wp-endpoints/v1/page/{id}`**
+**`better-rest-endpoints/v1/page/{id}`**
 Get a page by ID.
 
 Accepts the following parameters:
@@ -98,7 +98,7 @@ Returns a JSON response with the following:
 - ACF fields, if applicable
 
 ### Custom Post Type Collection
-**`better-wp-endpoints/v1/{custom_post_type}`**
+**`better-rest-endpoints/v1/{custom_post_type}`**
 Gets a collection of posts from a custom post type. Accepts the following parameters:
 
 - per_page (int)
@@ -121,7 +121,7 @@ Returns the following JSON response:
 - ACF fields if applicable
 
 ### Custom Post Type Post by ID
-**`better-wp-endpoints/v1/{custom_post_type}/{id}`**
+**`better-rest-endpoints/v1/{custom_post_type}/{id}`**
 Gets a single custom post type item. Accepts the following parameters:
 
 - ID
@@ -140,7 +140,7 @@ Returns the following JSON Response:
 - ACF Fields, if applicable
 
 ### Custom Post Type Post by Slug
-**`better-wp-endpoints/v1/{custom_post_type}/{slug}`**
+**`better-rest-endpoints/v1/{custom_post_type}/{slug}`**
 Gets a single custom post type item. Accepts the following parameters:
 
 - slug
@@ -159,7 +159,7 @@ Returns the following JSON Response:
 - ACF Fields, if applicable
 
 ### Get Posts Belonging To A Taxonomy Term
-**`better-wp-endpoints/v1/{taxonomy}/{term}`**
+**`better-rest-endpoints/v1/{taxonomy}/{term}`**
 Gets posts from a taxonomy term. Accepts the following parameters:
 
 - per_page (int)
@@ -182,7 +182,7 @@ Returns the following JSON Response:
 - ACF Fields, if applicable
 
 ### Menus
-**`better-wp-endpoints/v1/menus/{menu-slug}`**
+**`better-rest-endpoints/v1/menus/{menu-slug}`**
 Gets a WordPress Menu by slug. Accepts no parameters.
 
 Returns the following JSON Response in each item object:
@@ -198,7 +198,7 @@ Returns the following JSON Response in each item object:
 - menu item parent
 
 ### Taxonomies
-**`better-wp-endpoints/v1/taxonomies`**
+**`better-rest-endpoints/v1/taxonomies`**
 Gets a list of taxonomies used by WordPress. Accepts no parameters.
 
 Returns the following JSON response in each item object:
@@ -209,7 +209,7 @@ Returns the following JSON response in each item object:
 - Hierarchical (true/false)
 
 ### Search
-**`better-wp-endpoints/v1/search`**
+**`better-rest-endpoints/v1/search`**
 Gets a collection of posts and pages based on the search parameter. Accepts the following parameters:
 
 - page (int)

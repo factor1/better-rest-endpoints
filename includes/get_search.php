@@ -153,7 +153,7 @@ function bwe_get_search( WP_REST_Request $request ) {
  *
  */
 add_action( 'rest_api_init', function () {
-  register_rest_route( 'better-wp-endpoints/v1', '/search/', array(
+  register_rest_route( 'better-rest-endpoints/v1', '/search/', array(
     'methods' => 'GET',
     'callback' => 'bwe_get_search',
     'args' => array(

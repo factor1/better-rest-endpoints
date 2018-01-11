@@ -161,7 +161,7 @@ function bwe_get_posts( WP_REST_Request $request ) {
  *
  */
 add_action( 'rest_api_init', function () {
-  register_rest_route( 'better-wp-endpoints/v1', '/posts/', array(
+  register_rest_route( 'better-rest-endpoints/v1', '/posts/', array(
     'methods' => 'GET',
     'callback' => 'bwe_get_posts',
     'args' => array(

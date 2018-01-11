@@ -1,5 +1,5 @@
 {
-  "name": "better-wp-endpoints",
+  "name": "better-rest-endpoints",
   "version": "0.2.0",
   "description": "Serves up slimmer WordPress Rest API endpoints.",
   "main": "index.js",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/factor1/better-wp-endpoints.git"
+    "url": "git+https://github.com/factor1/better-rest-endpoints.git"
   },
   "keywords": [
     "WordPress",
@@ -24,9 +24,9 @@
   "author": "Eric Stout",
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/factor1/better-wp-endpoints/issues"
+    "url": "https://github.com/factor1/better-rest-endpoints/issues"
   },
-  "homepage": "https://github.com/factor1/better-wp-endpoints#readme",
+  "homepage": "https://github.com/factor1/better-rest-endpoints#readme",
   "devDependencies": {
     "fs-extra": "^4.0.2"
   }
