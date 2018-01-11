@@ -25,7 +25,8 @@ function bwe_get_pages( WP_REST_Request $request ) {
   	'posts_per_page'         => $posts_per_page,
     'paged'                  => $page,
     'order'                  => $order?:'DESC',
-    'orderby'                => $orderby?:'date'
+    'orderby'                => $orderby?:'date',
+    'post__not_in'           => array($exclude),
   );
 
   $query = new WP_Query( $args );
