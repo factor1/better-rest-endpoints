@@ -13,8 +13,6 @@ function bwe_build_custom_tax_endpoint() {
     // store the custom tax collections we have
     $custom_tax_collection = bwe_get_custom_tax();
 
-    //print_r($custom_tax_collection);
-
     foreach ($custom_tax_collection as $key => $tax) {
 
       $tax_terms = get_terms(array(
@@ -36,7 +34,8 @@ function bwe_build_custom_tax_endpoint() {
             $posts_per_page = $request['per_page']?: '10';
             $page = $request['page']?: '1';
             $show_content = $request['content']?: 'true';
-            $orderby = $request['orderby']? : null;
+            $orderby = $request['orderby']?: null;
+            $order = $request['order']?: null;
             $exclude = $request['exclude']?: null;
 
               // WP_Query Arguments
@@ -51,7 +50,8 @@ function bwe_build_custom_tax_endpoint() {
                     'field'    => 'slug'
                   )
                 ),
-                'orderby'                => $orderby,
+                'order'                  => $order?:'DESC',
+                'orderby'                => $orderby?:'date',
                 'post__not_in'           => array($exclude)
               );
 
@@ -176,6 +176,14 @@ function bwe_build_custom_tax_endpoint() {
 
                   return is_bool( $param );
                  }
+              ),
+              'order' =>  array(
+                'description'       => 'Change order of the collection.',
+                'type'              => 'string',
+                'validate_callback' => function($param, $request, $key) {
+                    return is_string( $param );
+                  },
+                'sanitize_callback' => 'sanitize_text_field',
               ),
               'orderby' =>  array(
                 'description'       => 'The sort order of the collection.',
