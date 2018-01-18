@@ -39,22 +39,22 @@ function bwe_build_single_cpt_endpoints_slug() {
             if( $query->have_posts() ){
 
               // setup post object
-              $bwe_cpt_post = new stdClass();
+              $bre_cpt_post = new stdClass();
 
               while( $query->have_posts() ) {
                 $query->the_post();
 
 
                 // get post data
-                $bwe_cpt_post->id = get_the_ID();
-                $bwe_cpt_post->title = get_the_title();
-                $bwe_cpt_post->slug = basename(get_permalink());
-                $bwe_cpt_post->date = get_the_date('c');
-                $bwe_cpt_post->excerpt = get_the_excerpt();
-                $bwe_cpt_post->content = apply_filters('the_content', get_the_content());
-                $bwe_cpt_post->author = esc_html__(get_the_author(), 'text_domain');
-                $bwe_cpt_post->author_id = get_the_author_meta('ID');
-                $bwe_cpt_post->author_nicename = get_the_author_meta('user_nicename');
+                $bre_cpt_post->id = get_the_ID();
+                $bre_cpt_post->title = get_the_title();
+                $bre_cpt_post->slug = basename(get_permalink());
+                $bre_cpt_post->date = get_the_date('c');
+                $bre_cpt_post->excerpt = get_the_excerpt();
+                $bre_cpt_post->content = apply_filters('the_content', get_the_content());
+                $bre_cpt_post->author = esc_html__(get_the_author(), 'text_domain');
+                $bre_cpt_post->author_id = get_the_author_meta('ID');
+                $bre_cpt_post->author_nicename = get_the_author_meta('user_nicename');
 
                 /*
                  *
@@ -64,10 +64,10 @@ function bwe_build_single_cpt_endpoints_slug() {
                 if( get_object_taxonomies($cpt) ){
                   $cpt_taxonomies = get_object_taxonomies($cpt, 'names');
 
-                  $bwe_cpt_post->terms = get_the_terms(get_the_ID(), $cpt_taxonomies);
+                  $bre_cpt_post->terms = get_the_terms(get_the_ID(), $cpt_taxonomies);
 
                 } else {
-                  $bwe_cpt_post->terms = array();
+                  $bre_cpt_post->terms = array();
                 }
 
 
@@ -76,7 +76,7 @@ function bwe_build_single_cpt_endpoints_slug() {
                  * return acf fields if they exist
                  *
                  */
-                $bwe_cpt_post->acf = bwe_get_acf();
+                $bre_cpt_post->acf = bwe_get_acf();
 
                 /*
                  *
@@ -84,21 +84,21 @@ function bwe_build_single_cpt_endpoints_slug() {
                  *
                  */
                 $thumbnail_names = get_intermediate_image_sizes();
-                $bwe_thumbnails = new stdClass();
+                $bre_thumbnails = new stdClass();
 
                 if( has_post_thumbnail() ){
                   foreach ($thumbnail_names as $key => $name) {
-                    $bwe_thumbnails->$name = esc_url(get_the_post_thumbnail_url($post->ID, $name));
+                    $bre_thumbnails->$name = esc_url(get_the_post_thumbnail_url($post->ID, $name));
                   }
 
-                  $bwe_cpt_post->media = $bwe_thumbnails;
+                  $bre_cpt_post->media = $bre_thumbnails;
                 } else {
-                  $bwe_cpt_post->media = false;
+                  $bre_cpt_post->media = false;
                 }
 
               }
 
-              return $bwe_cpt_post;
+              return $bre_cpt_post;
             } else {
               // if no post is found
               return array();

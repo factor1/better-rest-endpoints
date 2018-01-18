@@ -22,17 +22,17 @@ function get_post_by_id( $data ) {
   		$query->the_post();
 
       // better wordpress endpoint post object
-      $bwe_post = new stdClass();
+      $bre_post = new stdClass();
 
-      $bwe_post->id = get_the_ID();
-      $bwe_post->title = get_the_title();
-      $bwe_post->slug = basename(get_permalink());
-      $bwe_post->date = get_the_date('c');
-      $bwe_post->excerpt = get_the_excerpt();
-      $bwe_post->content = apply_filters('the_content', get_the_content());
-      $bwe_post->author = esc_html__(get_the_author(), 'text_domain');
-      $bwe_post->author_id = get_the_author_meta('ID');
-      $bwe_post->author_nicename = get_the_author_meta('user_nicename');
+      $bre_post->id = get_the_ID();
+      $bre_post->title = get_the_title();
+      $bre_post->slug = basename(get_permalink());
+      $bre_post->date = get_the_date('c');
+      $bre_post->excerpt = get_the_excerpt();
+      $bre_post->content = apply_filters('the_content', get_the_content());
+      $bre_post->author = esc_html__(get_the_author(), 'text_domain');
+      $bre_post->author_id = get_the_author_meta('ID');
+      $bre_post->author_nicename = get_the_author_meta('user_nicename');
 
       /*
        *
@@ -41,18 +41,18 @@ function get_post_by_id( $data ) {
        */
       $categories = get_the_category();
 
-      $bwe_categories = [];
-      $bwe_category_ids = [];
+      $bre_categories = [];
+      $bre_category_ids = [];
 
       if( !empty($categories) ){
         foreach ($categories as $key => $category) {
-          array_push($bwe_category_ids, $category->term_id);
-          array_push($bwe_categories, $category->cat_name);
+          array_push($bre_category_ids, $category->term_id);
+          array_push($bre_categories, $category->cat_name);
         }
       }
 
-      $bwe_post->category_ids = $bwe_category_ids;
-      $bwe_post->category_names = $bwe_categories;
+      $bre_post->category_ids = $bre_category_ids;
+      $bre_post->category_names = $bre_categories;
 
       /*
        *
@@ -61,25 +61,25 @@ function get_post_by_id( $data ) {
        */
       $tags = get_the_tags();
 
-      $bwe_tags = [];
-      $bwe_tag_ids = [];
+      $bre_tags = [];
+      $bre_tag_ids = [];
 
       if( !empty($tags) ){
         foreach ($tags as $key => $tag) {
-          array_push($bwe_tag_ids, $tag->term_id);
-          array_push($bwe_tags, $tag->name);
+          array_push($bre_tag_ids, $tag->term_id);
+          array_push($bre_tags, $tag->name);
         }
       }
 
-      $bwe_post->tag_ids = $bwe_tag_ids;
-      $bwe_post->tag_names = $bwe_tags;
+      $bre_post->tag_ids = $bre_tag_ids;
+      $bre_post->tag_names = $bre_tags;
 
       /*
        *
        * return acf fields if they exist
        *
        */
-      $bwe_post->acf = bwe_get_acf();
+      $bre_post->acf = bwe_get_acf();
 
       /*
        *
@@ -87,27 +87,27 @@ function get_post_by_id( $data ) {
        *
        */
       $thumbnail_names = get_intermediate_image_sizes();
-      $bwe_thumbnails = new stdClass();
+      $bre_thumbnails = new stdClass();
 
       if( has_post_thumbnail() ){
         foreach ($thumbnail_names as $key => $name) {
-          $bwe_thumbnails->$name = esc_url(get_the_post_thumbnail_url($post->ID, $name));
+          $bre_thumbnails->$name = esc_url(get_the_post_thumbnail_url($post->ID, $name));
         }
 
-        $bwe_post->media = $bwe_thumbnails;
+        $bre_post->media = $bre_thumbnails;
       } else {
-        $bwe_post->media = false;
+        $bre_post->media = false;
       }
 
       // Push the post to the main $post array
-      return $bwe_post;
+      return $bre_post;
 
   	}
   } else {
   	// no posts found
     $bwepost = [];
 
-    return $bwe_post;
+    return $bre_post;
   }
 
   // Restore original Post Data

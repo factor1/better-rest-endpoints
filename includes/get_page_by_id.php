@@ -24,11 +24,11 @@ function get_page_by_id( WP_REST_Request $request ){
       global $post;
 
       // better wordpress endpoint post object
-      $bwe_page = new stdClass();
+      $bre_page = new stdClass();
 
-      $bwe_page->id = get_the_ID();
-      $bwe_page->title = get_the_title();
-      $bwe_page->slug = basename(get_permalink());
+      $bre_page->id = get_the_ID();
+      $bre_page->title = get_the_title();
+      $bre_page->slug = basename(get_permalink());
 
       /*
        *
@@ -39,13 +39,13 @@ function get_page_by_id( WP_REST_Request $request ){
         // strip file extension to return just the name of the template
         $template_name = preg_replace('/\\.[^.\\s]{3,4}$/', '', basename(get_page_template()));
 
-        $bwe_page->template = $template_name;
+        $bre_page->template = $template_name;
 
       } else {
-        $bwe_page->template = 'default';
+        $bre_page->template = 'default';
       }
 
-      $bwe_page->content = apply_filters('the_content', get_the_content());
+      $bre_page->content = apply_filters('the_content', get_the_content());
 
       /*
        *
@@ -57,14 +57,14 @@ function get_page_by_id( WP_REST_Request $request ){
     	$id = ($parents) ? $parents[count($parents)-1]: $post->ID;
     	/* Get the parent and set the $class with the page slug (post_name) */
       $parent = get_post( $id );
-    	$bwe_page->parent = $parent->post_name != $post->post_name ? $parent->post_name : false;
+    	$bre_page->parent = $parent->post_name != $post->post_name ? $parent->post_name : false;
 
       /*
        *
        * return acf fields if they exist
        *
        */
-      $bwe_page->acf = bwe_get_acf();
+      $bre_page->acf = bwe_get_acf();
 
       /*
        *
@@ -72,26 +72,26 @@ function get_page_by_id( WP_REST_Request $request ){
        *
        */
       $thumbnail_names = get_intermediate_image_sizes();
-      $bwe_thumbnails = new stdClass();
+      $bre_thumbnails = new stdClass();
 
       if( has_post_thumbnail() ){
         foreach ($thumbnail_names as $key => $name) {
-          $bwe_thumbnails->$name = esc_url(get_the_post_thumbnail_url($post->ID, $name));
+          $bre_thumbnails->$name = esc_url(get_the_post_thumbnail_url($post->ID, $name));
         }
 
-        $bwe_page->media = $bwe_thumbnails;
+        $bre_page->media = $bre_thumbnails;
       } else {
-        $bwe_page->media = false;
+        $bre_page->media = false;
       }
 
       // Push the post to the main $post array
-      return $bwe_page;
+      return $bre_page;
 
     }
   } else {
 
     // return empty page array if no page
-    return $bwe_page;
+    return $bre_page;
 
   }
 
