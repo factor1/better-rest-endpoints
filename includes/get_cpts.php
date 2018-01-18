@@ -12,7 +12,7 @@
 
 function bwe_get_cpts() {
 
-  $bwe_cpts = array();
+  $bre_cpts = array();
 
   foreach ( get_post_types( '', 'names', 'and' ) as $post_type ) {
 
@@ -25,13 +25,13 @@ function bwe_get_cpts() {
     && $post_type !== 'customize_changeset'
     && $post_type !== 'acf-field-group'
     && $post_type !== 'acf-field'){
-      array_push($bwe_cpts, $post_type);
+      array_push($bre_cpts, $post_type);
     }
   }
 
   // check if array is empty, returns array if data exists, return false if empty
-  if( !empty($bwe_cpts) ){
-    return $bwe_cpts;
+  if( !empty($bre_cpts) ){
+    return $bre_cpts;
   } else {
     return false;
   }

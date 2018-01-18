@@ -60,23 +60,23 @@ function bwe_build_cpt_endpoints() {
             		$query->the_post();
 
                 // better wordpress endpoint post object
-                $bwe_post = new stdClass();
+                $bre_post = new stdClass();
 
                 // get post data
-                $bwe_post->id = get_the_ID();
-                $bwe_post->title = get_the_title();
-                $bwe_post->slug = basename(get_permalink());
-                $bwe_post->date = get_the_date('c');
-                $bwe_post->excerpt = get_the_excerpt();
+                $bre_post->id = get_the_ID();
+                $bre_post->title = get_the_title();
+                $bre_post->slug = basename(get_permalink());
+                $bre_post->date = get_the_date('c');
+                $bre_post->excerpt = get_the_excerpt();
 
                 // show post content unless parameter is false
                 if( $content === null || $show_content === true ) {
-                  $bwe_post->content = apply_filters('the_content', get_the_content());
+                  $bre_post->content = apply_filters('the_content', get_the_content());
                 }
 
-                $bwe_post->author = esc_html__(get_the_author(), 'text_domain');
-                $bwe_post->author_id = get_the_author_meta('ID');
-                $bwe_post->author_nicename = get_the_author_meta('user_nicename');
+                $bre_post->author = esc_html__(get_the_author(), 'text_domain');
+                $bre_post->author_id = get_the_author_meta('ID');
+                $bre_post->author_nicename = get_the_author_meta('user_nicename');
 
                 /*
                  *
@@ -86,10 +86,10 @@ function bwe_build_cpt_endpoints() {
                 if( get_object_taxonomies($cpt) ){
                   $cpt_taxonomies = get_object_taxonomies($cpt, 'names');
 
-                  $bwe_post->terms = get_the_terms(get_the_ID(), $cpt_taxonomies);
+                  $bre_post->terms = get_the_terms(get_the_ID(), $cpt_taxonomies);
 
                 } else {
-                  $bwe_post->terms = array();
+                  $bre_post->terms = array();
                 }
 
                 /*
@@ -97,7 +97,7 @@ function bwe_build_cpt_endpoints() {
                  * return acf fields if they exist
                  *
                  */
-                $bwe_post->acf = bwe_get_acf();
+                $bre_post->acf = bwe_get_acf();
 
                 /*
                  *
@@ -105,20 +105,20 @@ function bwe_build_cpt_endpoints() {
                  *
                  */
                 $thumbnail_names = get_intermediate_image_sizes();
-                $bwe_thumbnails = new stdClass();
+                $bre_thumbnails = new stdClass();
 
                 if( has_post_thumbnail() ){
                   foreach ($thumbnail_names as $key => $name) {
-                    $bwe_thumbnails->$name = esc_url(get_the_post_thumbnail_url($post->ID, $name));
+                    $bre_thumbnails->$name = esc_url(get_the_post_thumbnail_url($post->ID, $name));
                   }
 
-                  $bwe_post->media = $bwe_thumbnails;
+                  $bre_post->media = $bre_thumbnails;
                 } else {
-                  $bwe_post->media = false;
+                  $bre_post->media = false;
                 }
 
                 // Push the post to the main $post array
-                array_push($posts, $bwe_post);
+                array_push($posts, $bre_post);
             	}
 
               // return the post array

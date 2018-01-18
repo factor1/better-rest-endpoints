@@ -3,7 +3,7 @@
 Plugin Name:  Better Rest Endpoints
 Plugin URI:   https://github.com/factor1/better-rest-endpoints/
 Description:  Serves up slimmer WordPress Rest API endpoints, with some great enhancements.
-Version:      0.2.0
+Version:      1.0.0
 Author:       Eric Stout, Factor1 Studios
 Author URI:   https://factor1studios.com/
 License:      GPL3
@@ -29,10 +29,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-class F1_Better_WP_Endpoints {
+class F1_Better_Rest_Endpoints {
 
 	/**
-	 * @var $instance - The One true copy of F1_Better_WP_Endpoints that we'll ever need
+	 * @var $instance - The One true copy of F1_Better_Rest_Endpoints that we'll ever need
 	 */
 	private static $instance;
 
@@ -42,7 +42,7 @@ class F1_Better_WP_Endpoints {
 	private static $plugin_dir;
 
 	/**
-	 * F1_Better_WP_Endpoints constructor.
+	 * F1_Better_Rest_Endpoints constructor.
 	 */
 	private function __construct() {}
 
@@ -52,11 +52,11 @@ class F1_Better_WP_Endpoints {
 	 *
 	 * This is the singleton method.
 	 *
-	 * @return F1_Better_WP_Endpoints
+	 * @return F1_Better_Rest_Endpoints
 	 */
 	public function instance() {
-		if ( ! isset( self::$instance ) && ! ( self::$instance instanceof F1_Better_WP_Endpoints ) ) {
-			self::$instance = new F1_Better_WP_Endpoints;
+		if ( ! isset( self::$instance ) && ! ( self::$instance instanceof F1_Better_Rest_Endpoints ) ) {
+			self::$instance = new F1_Better_Rest_Endpoints;
 
 			self::$plugin_dir = trailingslashit( dirname( __FILE__ ) );
 
@@ -117,13 +117,13 @@ class F1_Better_WP_Endpoints {
 }
 
 /**
- * Returns the one true F1_Better_WP_Endpoints.
+ * Returns the one true F1_Better_Rest_Endpoints.
  *
  * Loads on plugins_loaded.
  *
- * @return F1_Better_WP_Endpoints
+ * @return F1_Better_Rest_Endpoints
  */
-function better_wp_endpoints() {
-	return F1_Better_WP_Endpoints::instance();
+function better_rest_endpoints() {
+	return F1_Better_Rest_Endpoints::instance();
 }
-add_action( 'plugins_loaded', 'better_wp_endpoints', 99 );
+add_action( 'plugins_loaded', 'better_rest_endpoints', 99 );

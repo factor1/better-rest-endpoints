@@ -66,27 +66,27 @@ function bwe_build_custom_tax_endpoint() {
                 $pages = $query->max_num_pages;
 
                 // setup post object
-                $bwe_tax_posts = array();
+                $bre_tax_posts = array();
 
                 while( $query->have_posts() ) {
                   $query->the_post();
 
-                  $bwe_tax_post = new stdClass();
+                  $bre_tax_post = new stdClass();
 
                   // get post data
-                  $bwe_tax_post->id = get_the_ID();
-                  $bwe_tax_post->title = get_the_title();
-                  $bwe_tax_post->slug = basename(get_permalink());
-                  $bwe_tax_post->date = get_the_date('c');
-                  $bwe_tax_post->excerpt = get_the_excerpt();
+                  $bre_tax_post->id = get_the_ID();
+                  $bre_tax_post->title = get_the_title();
+                  $bre_tax_post->slug = basename(get_permalink());
+                  $bre_tax_post->date = get_the_date('c');
+                  $bre_tax_post->excerpt = get_the_excerpt();
 
                   if( $content === null || $show_content === true ){
-                    $bwe_tax_post->content = apply_filters('the_content', get_the_content());
+                    $bre_tax_post->content = apply_filters('the_content', get_the_content());
                   }
 
-                  $bwe_tax_post->author = esc_html__(get_the_author(), 'text_domain');
-                  $bwe_tax_post->author_id = get_the_author_meta('ID');
-                  $bwe_tax_post->author_nicename = get_the_author_meta('user_nicename');
+                  $bre_tax_post->author = esc_html__(get_the_author(), 'text_domain');
+                  $bre_tax_post->author_id = get_the_author_meta('ID');
+                  $bre_tax_post->author_nicename = get_the_author_meta('user_nicename');
 
                   /*
                    *
@@ -95,10 +95,10 @@ function bwe_build_custom_tax_endpoint() {
                    */
                   if( get_the_terms(get_the_ID(), $tax) ){
 
-                    $bwe_tax_post->terms = get_the_terms(get_the_ID(), $tax);
+                    $bre_tax_post->terms = get_the_terms(get_the_ID(), $tax);
 
                   } else {
-                    $bwe_tax_post->terms = array();
+                    $bre_tax_post->terms = array();
                   }
 
 
@@ -107,7 +107,7 @@ function bwe_build_custom_tax_endpoint() {
                    * return acf fields if they exist
                    *
                    */
-                  $bwe_tax_post->acf = bwe_get_acf();
+                  $bre_tax_post->acf = bwe_get_acf();
 
                   /*
                    *
@@ -115,24 +115,24 @@ function bwe_build_custom_tax_endpoint() {
                    *
                    */
                   $thumbnail_names = get_intermediate_image_sizes();
-                  $bwe_thumbnails = new stdClass();
+                  $bre_thumbnails = new stdClass();
 
                   if( has_post_thumbnail() ){
                     foreach ($thumbnail_names as $key => $name) {
-                      $bwe_thumbnails->$name = esc_url(get_the_post_thumbnail_url($post->ID, $name));
+                      $bre_thumbnails->$name = esc_url(get_the_post_thumbnail_url($post->ID, $name));
                     }
 
-                    $bwe_tax_post->media = $bwe_thumbnails;
+                    $bre_tax_post->media = $bre_thumbnails;
                   } else {
-                    $bwe_tax_post->media = false;
+                    $bre_tax_post->media = false;
                   }
 
                   // push the post to the main array
-                  array_push($bwe_tax_posts, $bwe_tax_post);
+                  array_push($bre_tax_posts, $bre_tax_post);
 
                 }
                 // return the post array
-                $response = rest_ensure_response( $bwe_tax_posts );
+                $response = rest_ensure_response( $bre_tax_posts );
                 $response->header( 'X-WP-Total', (int) $total );
                 $response->header( 'X-WP-TotalPages', (int) $pages );
 
