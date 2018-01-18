@@ -8,14 +8,14 @@
  */
 
 function bwe_get_custom_tax() {
-  $bwe_custom_tax = array();
+  $bre_custom_tax = array();
 
   foreach ( get_taxonomies() as $custom_tax ){
-    array_push($bwe_custom_tax, $custom_tax);
+    array_push($bre_custom_tax, $custom_tax);
   }
 
-  if( !empty($bwe_custom_tax) ){
-    return $bwe_custom_tax;
+  if( !empty($bre_custom_tax) ){
+    return $bre_custom_tax;
   } else {
     return false;
   }
