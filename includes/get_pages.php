@@ -8,7 +8,7 @@
  */
 
 // get a collection of pages with parameters
-function bwe_get_pages( WP_REST_Request $request ) {
+function bre_get_pages( WP_REST_Request $request ) {
 
   // check for params
   $posts_per_page = $request['per_page']?: '10';
@@ -97,7 +97,7 @@ function bwe_get_pages( WP_REST_Request $request ) {
        * return acf fields if they exist
        *
        */
-      $bre_page->acf = bwe_get_acf();
+      $bre_page->acf = bre_get_acf();
 
       /*
        *
@@ -146,7 +146,7 @@ function bwe_get_pages( WP_REST_Request $request ) {
  add_action( 'rest_api_init', function () {
    register_rest_route( 'better-rest-endpoints/v1', '/pages/', array(
      'methods' => 'GET',
-     'callback' => 'bwe_get_pages',
+     'callback' => 'bre_get_pages',
      'args' => array(
        'per_page' => array(
          'description'       => 'Maxiumum number of items to show per page.',

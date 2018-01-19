@@ -7,11 +7,11 @@
  * @since 0.1.8
  */
 
-function bwe_build_custom_tax_endpoint() {
-  if( bwe_get_custom_tax() ){
+function bre_build_custom_tax_endpoint() {
+  if( bre_get_custom_tax() ){
 
     // store the custom tax collections we have
-    $custom_tax_collection = bwe_get_custom_tax();
+    $custom_tax_collection = bre_get_custom_tax();
 
     foreach ($custom_tax_collection as $key => $tax) {
 
@@ -107,7 +107,7 @@ function bwe_build_custom_tax_endpoint() {
                    * return acf fields if they exist
                    *
                    */
-                  $bre_tax_post->acf = bwe_get_acf();
+                  $bre_tax_post->acf = bre_get_acf();
 
                   /*
                    *
@@ -217,4 +217,4 @@ function bwe_build_custom_tax_endpoint() {
  * Add action for custom tax endpoint building
  *
  */
-add_action( 'rest_api_init', 'bwe_build_custom_tax_endpoint' );
+add_action( 'rest_api_init', 'bre_build_custom_tax_endpoint' );
