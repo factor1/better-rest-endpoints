@@ -7,7 +7,7 @@
  * @since 0.1.1
  */
 
-function bwe_get_menus() {
+function bre_get_menus() {
 
   // get registered menus
   $menus = get_terms('nav_menu');
@@ -62,4 +62,4 @@ function bwe_get_menus() {
  * Add action for cpt endpoint building
  *
  */
-add_action( 'rest_api_init', 'bwe_get_menus' );
+add_action( 'rest_api_init', 'bre_get_menus' );

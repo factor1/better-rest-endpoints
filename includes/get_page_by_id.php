@@ -64,7 +64,7 @@ function get_page_by_id( WP_REST_Request $request ){
        * return acf fields if they exist
        *
        */
-      $bre_page->acf = bwe_get_acf();
+      $bre_page->acf = bre_get_acf();
 
       /*
        *

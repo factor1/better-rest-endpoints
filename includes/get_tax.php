@@ -7,7 +7,7 @@
  * @since 0.1.8
  */
 
-function bwe_get_custom_tax() {
+function bre_get_custom_tax() {
   $bre_custom_tax = array();
 
   foreach ( get_taxonomies() as $custom_tax ){

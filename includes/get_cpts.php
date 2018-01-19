@@ -1,6 +1,6 @@
 <?php
 /**
- * bwe_get_cpts()
+ * bre_get_cpts()
  * Get Post Types, but filter out core WP and ACF post types
  *
  * TODO: Simplify the allowed post types, example: https://github.com/postpromoterpro/post-promoter-pro/blob/master/includes/general-functions.php#L89
@@ -10,7 +10,7 @@
  * @since 0.0.1
  */
 
-function bwe_get_cpts() {
+function bre_get_cpts() {
 
   $bre_cpts = array();
 

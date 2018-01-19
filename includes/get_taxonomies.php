@@ -7,7 +7,7 @@
  * @since 0.2.0
  */
 
-function bwe_get_taxonomies() {
+function bre_get_taxonomies() {
 
   // set an empty array
   $bre_taxonomies = array();
@@ -47,4 +47,4 @@ function bwe_get_taxonomies() {
  * Add action for taxonomies
  *
  */
-add_action( 'rest_api_init', 'bwe_get_taxonomies' );
+add_action( 'rest_api_init', 'bre_get_taxonomies' );

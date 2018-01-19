@@ -7,11 +7,11 @@
  * @since 0.0.1
  */
 
-function bwe_build_single_cpt_endpoints() {
-  if( bwe_get_cpts() ) {
+function bre_build_single_cpt_endpoints() {
+  if( bre_get_cpts() ) {
 
     // store what custom post types we have
-    $cpt_collection = bwe_get_cpts();
+    $cpt_collection = bre_get_cpts();
 
     foreach ($cpt_collection as $key => $cpt) {
 
@@ -76,7 +76,7 @@ function bwe_build_single_cpt_endpoints() {
                  * return acf fields if they exist
                  *
                  */
-                $bre_cpt_post->acf = bwe_get_acf();
+                $bre_cpt_post->acf = bre_get_acf();
 
                 /*
                  *
@@ -122,4 +122,4 @@ function bwe_build_single_cpt_endpoints() {
  * Add action for cpt endpoint building
  *
  */
-add_action( 'rest_api_init', 'bwe_build_single_cpt_endpoints' );
+add_action( 'rest_api_init', 'bre_build_single_cpt_endpoints' );
