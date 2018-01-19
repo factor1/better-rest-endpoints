@@ -3,7 +3,7 @@
 Plugin Name:  Better Rest Endpoints
 Plugin URI:   https://github.com/factor1/better-rest-endpoints/
 Description:  Serves up slimmer WordPress Rest API endpoints, with some great enhancements.
-Version:      1.0.0
+Version:      1.0.1
 Author:       Eric Stout, Factor1 Studios
 Author URI:   https://factor1studios.com/
 License:      GPL3
@@ -22,7 +22,7 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with Better Rest Endpoints. If not, see {URI to Plugin License}.
+along with Better Rest Endpoints. If not, see https://www.gnu.org/licenses/gpl-3.0.en.html.
 */
 
 if ( ! defined( 'ABSPATH' ) ) {
