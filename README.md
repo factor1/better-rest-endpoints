@@ -1,5 +1,5 @@
 # better-rest-endpoints
-A WordPress plugin that serves up slimmer WP Rest API endpoints - WIP
+A WordPress plugin that serves up slimmer WP Rest API endpoints.
 
 ## Endpoints
 
