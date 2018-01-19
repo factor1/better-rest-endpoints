@@ -7,7 +7,7 @@
  * @since 0.0.1
  */
 
-function bwe_get_acf() {
+function bre_get_acf() {
   // check if acf is active before doing anything
    if( is_plugin_active('advanced-custom-fields-pro/acf.php') || is_plugin_active('advanced-custom-fields/acf.php') ) {
 
