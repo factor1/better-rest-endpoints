@@ -8,6 +8,9 @@
  */
 
 function bre_get_acf() {
+  
+  include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+
   // check if acf is active before doing anything
    if( is_plugin_active('advanced-custom-fields-pro/acf.php') || is_plugin_active('advanced-custom-fields/acf.php') ) {
 

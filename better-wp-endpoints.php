@@ -54,7 +54,7 @@ class F1_Better_Rest_Endpoints {
 	 *
 	 * @return F1_Better_Rest_Endpoints
 	 */
-	public function instance() {
+	public static function instance() {
 		if ( ! isset( self::$instance ) && ! ( self::$instance instanceof F1_Better_Rest_Endpoints ) ) {
 			self::$instance = new F1_Better_Rest_Endpoints;
 
