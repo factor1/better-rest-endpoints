@@ -7,10 +7,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 n/a
 
+## [1.1.0] - 2018-01-25
+### Added
+- Adds post by slug endpoint 
+
 ## [1.0.2] - 2018-01-19
 ### Fixed
 - Fixed static instance warning
-- Fixed failure of ACF function by including admin plugin.php 
+- Fixed failure of ACF function by including admin plugin.php
 
 ### Updates
 - Updates all functions named bwe_ to bre_
