@@ -2,12 +2,12 @@
 /**
  * Grab post by slug
  *
- * @param array $data Options for the function.
+ * @param array $request Options for the function.
  * @return string|null Post by slug or empty object for none
  * @since 1.1.0
  */
 
-function get_post_by_slug( $data ) {
+function get_post_by_slug( WP_REST_Request $request ) {
   $post_slug = $request['slug'];
 
   // WP_Query arguments
@@ -107,7 +107,7 @@ function get_post_by_slug( $data ) {
   	}
   } else {
   	// no posts found
-    $bwepost = [];
+    $bre_post = [];
 
     return $bre_post;
   }

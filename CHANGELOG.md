@@ -7,9 +7,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 n/a
 
+## [1.1.2] - 2018-01-25
+### Update
+- Fix issue where get post by slug was returning just the first post
+- Fix instance of lefover $bwe variable naming 
+
+## [1.1.1] - 2018-01-25
+### Update
+- Update plugin version to re-trigger build.
+
 ## [1.1.0] - 2018-01-25
 ### Added
-- Adds post by slug endpoint 
+- Adds post by slug endpoint
 
 ## [1.0.2] - 2018-01-19
 ### Fixed
