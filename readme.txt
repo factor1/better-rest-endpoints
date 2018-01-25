@@ -6,7 +6,7 @@ Contributors: factor1, erwstout
 Tags: rest, api, endpoints, acf, json
 Requires at least: 4.7.1
 Tested up to: 4.9.2
-Stable Tag: 1.1.0
+Stable Tag: 1.1.1
 License: GNU Version 3 or Any Later Version
 
 A WordPress plugin that serves up slimmer WP Rest API endpoints.
@@ -41,6 +41,9 @@ Just activating the plugin will do nothing - you need to build/adjust your theme
 apps endpoints to use Better Rest Endpoints.
 
 == Changelog ==
+
+= 1.1.1, January 25, 2018 =
+* Update: update plugin version to retrigger build.
 
 = 1.1.0, January 25, 2018 =
 * Add: get post by slug endpoint
