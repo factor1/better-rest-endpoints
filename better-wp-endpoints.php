@@ -77,6 +77,9 @@ class F1_Better_Rest_Endpoints {
 		// get a post by id
 		include_once self::$plugin_dir . 'includes/get_post_by_id.php';
 
+		// get a post by slug
+		include_once self::$plugin_dir . 'includes/get_post_by_slug.php';
+
 		// get posts
 		include_once self::$plugin_dir . 'includes/get_posts.php';
 
