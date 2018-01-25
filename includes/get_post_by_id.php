@@ -3,7 +3,7 @@
  * Grab latest post by ID
  *
  * @param array $data Options for the function.
- * @return string|null Post title for the latest,  * or null if none.
+ * @return string|null Post data by id,  * or empty object if none.
  * @since 0.0.1
  */
 
