@@ -57,6 +57,30 @@ Returns a JSON response with the following:
 - Tag IDs
 - ACF fields, if applicable
 
+### Post by slug
+**`better-rest-endpoints/v1/post/{slug}`**
+Get a post by ID.
+
+Accepts the following parameters:
+
+- slug (string)
+
+Returns a JSON response with the following:
+
+- id
+- slug
+- title
+- date (ISO 8601)
+- excerpt
+- content
+- all possible thumbnail sizes & URLs
+- Author, user_nicename, & Author ID
+- Categories
+- Category IDs
+- Tags
+- Tag IDs
+- ACF fields, if applicable
+
 ### Pages
 **`better-rest-endpoints/v1/pages`**
 Gets a collection of pages. Accepts the following parameters:

@@ -42,10 +42,13 @@ apps endpoints to use Better Rest Endpoints.
 
 == Changelog ==
 
-= 1.0.2, January 1, 2018 =
+= 1.1.0, January 25, 2018 =
+* Add: get post by slug endpoint 
+
+= 1.0.2, January 19, 2018 =
 * Fix: static instance warning
 * Fix: failure of ACF function by including admin plugin.php
 * Update: all functions named bwe_ to bre_
 
-= 1.0.1, January 1, 2018 =
+= 1.0.1, January 19, 2018 =
 * Prep: Update files for release on WP Repo.

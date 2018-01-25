@@ -1,16 +1,18 @@
 <?php
 /**
- * Grab latest post by ID
+ * Grab post by slug
  *
  * @param array $data Options for the function.
- * @return string|null Post data by id,  * or empty object if none.
- * @since 0.0.1
+ * @return string|null Post by slug or empty object for none
+ * @since 1.1.0
  */
 
-function get_post_by_id( $data ) {
+function get_post_by_slug( $data ) {
+  $post_slug = $request['slug'];
+
   // WP_Query arguments
   $args = array(
-    'p' => $data['id']
+    'name' => $post_slug
   );
 
   // The Query
@@ -115,8 +117,8 @@ function get_post_by_id( $data ) {
 }
 
 add_action( 'rest_api_init', function () {
-  register_rest_route( 'better-rest-endpoints/v1', '/post/(?P<id>\d+)', array(
+  register_rest_route( 'better-rest-endpoints/v1', '/post/(?P<slug>\S+)', array(
     'methods' => 'GET',
-    'callback' => 'get_post_by_id',
+    'callback' => 'get_post_by_slug',
   ) );
 } );
