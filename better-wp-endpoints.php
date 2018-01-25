@@ -3,7 +3,7 @@
 Plugin Name:  Better Rest Endpoints
 Plugin URI:   https://github.com/factor1/better-rest-endpoints/
 Description:  Serves up slimmer WordPress Rest API endpoints, with some great enhancements.
-Version:      1.1.1
+Version:      1.1.2
 Author:       Eric Stout, Factor1 Studios
 Author URI:   https://factor1studios.com/
 License:      GPL3
