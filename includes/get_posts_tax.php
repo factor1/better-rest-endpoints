@@ -35,6 +35,10 @@ function bre_build_custom_tax_endpoint() {
             $page = $request['page']?: '1';
             $content = $request['content'];
             $show_content = filter_var($content, FILTER_VALIDATE_BOOLEAN);
+            $acf = $request['acf'];
+            $show_acf = filter_var($acf, FILTER_VALIDATE_BOOLEAN);
+            $media = $request['media'];
+            $show_media = filter_var($media, FILTER_VALIDATE_BOOLEAN);
             $orderby = $request['orderby']?: null;
             $order = $request['order']?: null;
             $exclude = $request['exclude']?: null;
@@ -107,25 +111,30 @@ function bre_build_custom_tax_endpoint() {
                    * return acf fields if they exist
                    *
                    */
-                  $bre_tax_post->acf = bre_get_acf();
+                   if( $acf === null || $show_acf === true ) {
+                     $bre_tax_post->acf = bre_get_acf();
+                   }
 
-                  /*
-                   *
-                   * get possible thumbnail sizes and urls
-                   *
-                   */
-                  $thumbnail_names = get_intermediate_image_sizes();
-                  $bre_thumbnails = new stdClass();
+                   /*
+                    *
+                    * get possible thumbnail sizes and urls if query set to true or by default
+                    *
+                    */
 
-                  if( has_post_thumbnail() ){
-                    foreach ($thumbnail_names as $key => $name) {
-                      $bre_thumbnails->$name = esc_url(get_the_post_thumbnail_url($post->ID, $name));
-                    }
+                   if( $media === null || $show_media === true ) {
+                     $thumbnail_names = get_intermediate_image_sizes();
+                     $bre_thumbnails = new stdClass();
 
-                    $bre_tax_post->media = $bre_thumbnails;
-                  } else {
-                    $bre_tax_post->media = false;
-                  }
+                     if( has_post_thumbnail() ){
+                       foreach ($thumbnail_names as $key => $name) {
+                         $bre_thumbnails->$name = esc_url(get_the_post_thumbnail_url($post->ID, $name));
+                       }
+
+                       $bre_tax_post->media = $bre_thumbnails;
+                     } else {
+                       $bre_tax_post->media = false;
+                     }
+                   }
 
                   // push the post to the main array
                   array_push($bre_tax_posts, $bre_tax_post);
@@ -166,6 +175,34 @@ function bre_build_custom_tax_endpoint() {
               ),
               'content' =>  array(
                 'description'       => 'Hide or show the_content from the collection.',
+                'type'              => 'boolean',
+                'validate_callback' => function( $param, $request, $key ) {
+
+                  if ( $param == 'true' || $param == 'TRUE' ) {
+                    $param = true;
+                  } else if( $param == 'false' || $param == 'FALSE') {
+                    $param = false;
+                  }
+
+                  return is_bool( $param );
+                 }
+              ),
+              'acf' =>  array(
+                'description'       => 'Hide or show acf fields from the collection.',
+                'type'              => 'boolean',
+                'validate_callback' => function( $param, $request, $key ) {
+
+                  if ( $param == 'true' || $param == 'TRUE' ) {
+                    $param = true;
+                  } else if( $param == 'false' || $param == 'FALSE') {
+                    $param = false;
+                  }
+
+                  return is_bool( $param );
+                 }
+              ),
+              'media' =>  array(
+                'description'       => 'Hide or show featured media from the collection.',
                 'type'              => 'boolean',
                 'validate_callback' => function( $param, $request, $key ) {
 
