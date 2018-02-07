@@ -5,8 +5,8 @@ Plugin URI: https://github.com/factor1/better-rest-endpoints
 Contributors: factor1, erwstout
 Tags: rest, api, endpoints, acf, json
 Requires at least: 4.7.1
-Tested up to: 4.9.2
-Stable Tag: 1.1.2
+Tested up to: 4.9.4
+Stable Tag: 1.2.0
 License: GNU Version 3 or Any Later Version
 
 A WordPress plugin that serves up slimmer WP Rest API endpoints.
@@ -42,9 +42,13 @@ apps endpoints to use Better Rest Endpoints.
 
 == Changelog ==
 
+= 1.2.0, Febuary 7, 2018 =
+* Add: ACF query in endpoint url to hide acf values from the response where applicable (all collections)
+* Add: Media query in endpoint url to hide featured media from the response where applicable (all collections)
+
 = 1.1.2, January 25, 2018 =
 * Fix: issue where get post by slug was returning just the first post
-* Fix: instance of lefover $bwe variable naming 
+* Fix: instance of lefover $bwe variable naming
 
 = 1.1.1, January 25, 2018 =
 * Update: update plugin version to retrigger build.

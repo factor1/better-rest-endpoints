@@ -17,6 +17,10 @@ function bre_get_posts( WP_REST_Request $request ) {
   $tag = $request['tag']?: null;
   $content = $request['content'];
   $show_content = filter_var($content, FILTER_VALIDATE_BOOLEAN);
+  $acf = $request['acf'];
+  $show_acf = filter_var($acf, FILTER_VALIDATE_BOOLEAN);
+  $media = $request['media'];
+  $show_media = filter_var($media, FILTER_VALIDATE_BOOLEAN);
   $orderby = $request['orderby']?: null;
   $order = $request['order']?: null;
   $exclude = $request['exclude']?: null;
@@ -113,27 +117,32 @@ function bre_get_posts( WP_REST_Request $request ) {
 
       /*
        *
-       * return acf fields if they exist
+       * return acf fields if they exist and depending on query string
        *
        */
-      $bre_post->acf = bre_get_acf();
+      if( $acf === null || $show_acf === true ) {
+        $bre_post->acf = bre_get_acf();
+      }
 
       /*
        *
-       * get possible thumbnail sizes and urls
+       * get possible thumbnail sizes and urls if query set to true or by default
        *
        */
-      $thumbnail_names = get_intermediate_image_sizes();
-      $bre_thumbnails = new stdClass();
 
-      if( has_post_thumbnail() ){
-        foreach ($thumbnail_names as $key => $name) {
-          $bre_thumbnails->$name = esc_url(get_the_post_thumbnail_url($post->ID, $name));
+      if( $media === null || $show_media === true ) {
+        $thumbnail_names = get_intermediate_image_sizes();
+        $bre_thumbnails = new stdClass();
+
+        if( has_post_thumbnail() ){
+          foreach ($thumbnail_names as $key => $name) {
+            $bre_thumbnails->$name = esc_url(get_the_post_thumbnail_url($post->ID, $name));
+          }
+
+          $bre_post->media = $bre_thumbnails;
+        } else {
+          $bre_post->media = false;
         }
-
-        $bre_post->media = $bre_thumbnails;
-      } else {
-        $bre_post->media = false;
       }
 
       // Push the post to the main $post array
@@ -219,6 +228,34 @@ add_action( 'rest_api_init', function () {
           }
 
           return is_bool( $status );
+         }
+      ),
+      'acf' =>  array(
+        'description'       => 'Hide or show acf fields from the collection.',
+        'type'              => 'boolean',
+        'validate_callback' => function( $param, $request, $key ) {
+
+          if ( $param == 'true' || $param == 'TRUE' ) {
+            $param = true;
+          } else if( $param == 'false' || $param == 'FALSE') {
+            $param = false;
+          }
+
+          return is_bool( $param );
+         }
+      ),
+      'media' =>  array(
+        'description'       => 'Hide or show featured media from the collection.',
+        'type'              => 'boolean',
+        'validate_callback' => function( $param, $request, $key ) {
+
+          if ( $param == 'true' || $param == 'TRUE' ) {
+            $param = true;
+          } else if( $param == 'false' || $param == 'FALSE') {
+            $param = false;
+          }
+
+          return is_bool( $param );
          }
       ),
       'order' =>  array(
