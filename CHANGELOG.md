@@ -7,10 +7,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 n/a
 
+## [1.2.0] - 2018-02-07
+### Added
+- ACF query in endpoint url to hide acf values from the response where applicable (all collections)
+- Media query in endpoint url to hide featured media from the response where applicable (all collections)
+
 ## [1.1.2] - 2018-01-25
 ### Update
 - Fix issue where get post by slug was returning just the first post
-- Fix instance of lefover $bwe variable naming 
+- Fix instance of lefover $bwe variable naming
 
 ## [1.1.1] - 2018-01-25
 ### Update

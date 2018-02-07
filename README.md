@@ -17,6 +17,8 @@ Gets a collection of posts. Accepts the following parameters:
 - order (string - 'ASC' vs 'DESC')
 - exclude (int) a post ID to exclude from the response
 - author (string) limit posts by author nice name (user_nicename)
+- acf (boolean - setting to false omits `acf` from being returned)
+- media (boolean - setting to false omits `media` (featured media) from being returned)
 
 It returns a JSON response with the following:
 - id
@@ -92,6 +94,8 @@ Gets a collection of pages. Accepts the following parameters:
 - page (int)
 - content (boolean - setting to false hides the content from the response)
 - exclude (int) a post ID to exclude from the response
+- acf (boolean - setting to false omits `acf` from being returned)
+- media (boolean - setting to false omits `media` (featured media) from being returned)
 
 Returns the following JSON Response:
 
@@ -130,6 +134,8 @@ Gets a collection of posts from a custom post type. Accepts the following parame
 - content (boolean - setting to false omits `the_content` from being returned)
 - orderby (string) - see the [codex](https://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters) for options, currently does not support multiple values
 - exclude (int) a post ID to exclude from the response
+- acf (boolean - setting to false omits `acf` from being returned)
+- media (boolean - setting to false omits `media` (featured media) from being returned)
 
 Returns the following JSON response:
 
@@ -191,6 +197,8 @@ Gets posts from a taxonomy term. Accepts the following parameters:
 - content (boolean - setting to false omits `the_content` from being returned)
 - orderby (string) - see the [codex](https://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters) for options, currently does not support multiple values
 - exclude (int) a post ID to exclude from the response
+- acf (boolean - setting to false omits `acf` from being returned)
+- media (boolean - setting to false omits `media` (featured media) from being returned)
 
 Returns the following JSON Response:
 
@@ -242,6 +250,8 @@ Gets a collection of posts and pages based on the search parameter. Accepts the 
 - tag id  (int)
 - content (boolean) set to false to omit content from showing in JSON response
 - search (string | required)
+- acf (boolean - setting to false omits `acf` from being returned)
+- media (boolean - setting to false omits `media` (featured media) from being returned)
 
 It returns a JSON response with the following (returns an empty array if no posts found):
 - id
