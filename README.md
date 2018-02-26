@@ -267,3 +267,19 @@ It returns a JSON response with the following (returns an empty array if no post
 - Tags
 - Tag IDs
 - ACF fields, if applicable
+
+## Hooks and Filters
+
+### Filter the Custom Post Types endpoints
+
+```php
+add_filter('better_rest_endpoints_cpt_collection', function($cpt_collection){
+	$cpt_collection = array_flip($cpt_collection);
+	unset($cpt_collection['oembed_cache']);
+	unset($cpt_collection['_pods_template']);
+	unset($cpt_collection['_pods_pod']);
+	unset($cpt_collection['_pods_field']);
+	$cpt_collection = array_values( array_flip($cpt_collection) );
+	return $cpt_collection;
+});
+```
