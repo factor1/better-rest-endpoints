@@ -26,9 +26,11 @@ function get_post_by_slug( WP_REST_Request $request ) {
       // better wordpress endpoint post object
       $bre_post = new stdClass();
 
+      $permalink = get_permalink();
       $bre_post->id = get_the_ID();
       $bre_post->title = get_the_title();
-      $bre_post->slug = basename(get_permalink());
+      $bre_post->slug = basename($permalink);
+      $bre_post->permalink = $permalink;
       $bre_post->date = get_the_date('c');
       $bre_post->excerpt = get_the_excerpt();
       $bre_post->content = apply_filters('the_content', get_the_content());
