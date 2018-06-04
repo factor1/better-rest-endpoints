@@ -67,9 +67,11 @@ function bre_build_cpt_endpoints() {
                 $bre_post = new stdClass();
 
                 // get post data
+                $permalink = get_permalink();
                 $bre_post->id = get_the_ID();
                 $bre_post->title = get_the_title();
-                $bre_post->slug = basename(get_permalink());
+                $bre_post->slug = basename($permalink);
+                $bre_post->permalink = $permalink;
                 $bre_post->date = get_the_date('c');
                 $bre_post->excerpt = get_the_excerpt();
 

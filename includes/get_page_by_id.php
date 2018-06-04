@@ -26,9 +26,11 @@ function get_page_by_id( WP_REST_Request $request ){
       // better wordpress endpoint post object
       $bre_page = new stdClass();
 
+      $permalink = get_permalink();
       $bre_page->id = get_the_ID();
       $bre_page->title = get_the_title();
-      $bre_page->slug = basename(get_permalink());
+      $bre_page->slug = basename($permalink);
+      $bre_page->permalink = $permalink;
 
       /*
        *
