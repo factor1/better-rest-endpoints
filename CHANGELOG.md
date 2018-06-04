@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 n/a
 
+## [1.2.1] - 2018-06-04
+### Added
+- Permalinks to all page/post endpoints
+
 ## [1.2.0] - 2018-02-07
 ### Added
 - ACF query in endpoint url to hide acf values from the response where applicable (all collections)

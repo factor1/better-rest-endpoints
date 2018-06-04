@@ -29,6 +29,8 @@ function bre_get_cpts() {
     }
   }
 
+  $bre_cpts = apply_filters( 'better_rest_endpoints_cpt_collection', $bre_cpts );
+
   // check if array is empty, returns array if data exists, return false if empty
   if( !empty($bre_cpts) ){
     return $bre_cpts;

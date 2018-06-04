@@ -46,9 +46,11 @@ function bre_build_single_cpt_endpoints() {
 
 
                 // get post data
+                $permalink = get_permalink();
                 $bre_cpt_post->id = get_the_ID();
                 $bre_cpt_post->title = get_the_title();
-                $bre_cpt_post->slug = basename(get_permalink());
+                $bre_cpt_post->slug = basename($permalink);
+                $bre_cpt_post->permalink = $permalink;
                 $bre_cpt_post->date = get_the_date('c');
                 $bre_cpt_post->excerpt = get_the_excerpt();
                 $bre_cpt_post->content = apply_filters('the_content', get_the_content());
