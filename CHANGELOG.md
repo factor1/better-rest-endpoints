@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 n/a
 
+## [1.3.0] - 2018-06-05
+### Added
+- Yoast SEO output, see docs for more information
+
+### Updated
+- Slug output in responses
+
 ## [1.2.1] - 2018-06-04
 ### Added
 - Permalinks to all page/post endpoints

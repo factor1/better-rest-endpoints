@@ -4,11 +4,11 @@
  *
  * @param none
  * @return object|null Yoast object,  * or null if none.
- * @since 1.2.1
+ * @since 1.3.0
  */
 
 function bre_get_yoast( $post_ID = false ) {
-  
+
     include_once ( ABSPATH . 'wp-admin/includes/plugin.php' );
 
     // check if yoast is active before doing anything
