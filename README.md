@@ -18,6 +18,7 @@ Gets a collection of posts. Accepts the following parameters:
 - exclude (int) a post ID to exclude from the response
 - author (string) limit posts by author nice name (user_nicename)
 - acf (boolean - setting to false omits `acf` from being returned)
+- yoast (boolean - setting to false omits `yoast` from being returned)
 - media (boolean - setting to false omits `media` (featured media) from being returned)
 
 It returns a JSON response with the following:
@@ -34,6 +35,7 @@ It returns a JSON response with the following:
 - Tags
 - Tag IDs
 - ACF fields, if applicable
+- Yoast SEO fields, if applicable
 
 ### Post
 **`better-rest-endpoints/v1/post/{id}`**
@@ -58,6 +60,7 @@ Returns a JSON response with the following:
 - Tags
 - Tag IDs
 - ACF fields, if applicable
+- Yoast SEO fields, if applicable
 
 ### Post by slug
 **`better-rest-endpoints/v1/post/{slug}`**
@@ -82,6 +85,7 @@ Returns a JSON response with the following:
 - Tags
 - Tag IDs
 - ACF fields, if applicable
+- Yoast SEO fields, if applicable
 
 ### Pages
 **`better-rest-endpoints/v1/pages`**
@@ -95,6 +99,7 @@ Gets a collection of pages. Accepts the following parameters:
 - content (boolean - setting to false hides the content from the response)
 - exclude (int) a post ID to exclude from the response
 - acf (boolean - setting to false omits `acf` from being returned)
+- yoast (boolean - setting to false omits `yoast` from being returned)
 - media (boolean - setting to false omits `media` (featured media) from being returned)
 
 Returns the following JSON Response:
@@ -105,6 +110,7 @@ Returns the following JSON Response:
 - Title
 - Content
 - ACF Fields
+- Yoast SEO Fields
 - all possible thumbnail sizes & URLs
 
 ### Page by ID
@@ -124,6 +130,7 @@ Returns a JSON response with the following:
 - content
 - all possible thumbnail sizes & URLs
 - ACF fields, if applicable
+- Yoast SEO fields, if applicable
 
 ### Custom Post Type Collection
 **`better-rest-endpoints/v1/{custom_post_type}`**
@@ -135,6 +142,7 @@ Gets a collection of posts from a custom post type. Accepts the following parame
 - orderby (string) - see the [codex](https://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters) for options, currently does not support multiple values
 - exclude (int) a post ID to exclude from the response
 - acf (boolean - setting to false omits `acf` from being returned)
+- yoast (boolean - setting to false omits `yoast` from being returned)
 - media (boolean - setting to false omits `media` (featured media) from being returned)
 
 Returns the following JSON response:
@@ -149,6 +157,7 @@ Returns the following JSON response:
 - all possible thumbnail sizes & URLs
 - Author, user_nicename, & Author ID
 - ACF fields if applicable
+- Yoast SEO fields if applicable
 
 ### Custom Post Type Post by ID
 **`better-rest-endpoints/v1/{custom_post_type}/{id}`**
@@ -168,6 +177,7 @@ Returns the following JSON Response:
 - all possible thumbnail sizes & URLs
 - Author, user_nicename, & Author ID
 - ACF Fields, if applicable
+- Yoast SEO Fields, if applicable
 
 ### Custom Post Type Post by Slug
 **`better-rest-endpoints/v1/{custom_post_type}/{slug}`**
@@ -187,6 +197,7 @@ Returns the following JSON Response:
 - all possible thumbnail sizes & URLs
 - Author, user_nicename, & Author ID
 - ACF Fields, if applicable
+- Yoast SEO Fields, if applicable
 
 ### Get Posts Belonging To A Taxonomy Term
 **`better-rest-endpoints/v1/{taxonomy}/{term}`**
@@ -198,6 +209,7 @@ Gets posts from a taxonomy term. Accepts the following parameters:
 - orderby (string) - see the [codex](https://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters) for options, currently does not support multiple values
 - exclude (int) a post ID to exclude from the response
 - acf (boolean - setting to false omits `acf` from being returned)
+- yoast (boolean - setting to false omits `yoast` from being returned)
 - media (boolean - setting to false omits `media` (featured media) from being returned)
 
 Returns the following JSON Response:
@@ -212,6 +224,7 @@ Returns the following JSON Response:
 - all possible thumbnail sizes & URLs
 - Author, user_nicename, & Author ID
 - ACF Fields, if applicable
+- Yoast SEO Fields, if applicable
 
 ### Menus
 **`better-rest-endpoints/v1/menus/{menu-slug}`**
@@ -251,6 +264,7 @@ Gets a collection of posts and pages based on the search parameter. Accepts the 
 - content (boolean) set to false to omit content from showing in JSON response
 - search (string | required)
 - acf (boolean - setting to false omits `acf` from being returned)
+- yoast (boolean - setting to false omits `yoast` from being returned)
 - media (boolean - setting to false omits `media` (featured media) from being returned)
 
 It returns a JSON response with the following (returns an empty array if no posts found):
@@ -267,6 +281,7 @@ It returns a JSON response with the following (returns an empty array if no post
 - Tags
 - Tag IDs
 - ACF fields, if applicable
+- Yoast SEO fields, if applicable
 
 ## Hooks and Filters
 

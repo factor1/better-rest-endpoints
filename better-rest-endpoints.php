@@ -74,6 +74,9 @@ class F1_Better_Rest_Endpoints {
 		// include acf function
 		include_once self::$plugin_dir . 'includes/get_acf.php';
 
+		// include yoast seo function
+		include_once self::$plugin_dir . 'includes/get_yoast.php';
+
 		// get a post by id
 		include_once self::$plugin_dir . 'includes/get_post_by_id.php';
 

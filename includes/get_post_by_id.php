@@ -21,13 +21,15 @@ function get_post_by_id( $data ) {
   	while ( $query->have_posts() ) {
   		$query->the_post();
 
+      global $post;
+
       // better wordpress endpoint post object
       $bre_post = new stdClass();
 
       $permalink = get_permalink();
       $bre_post->id = get_the_ID();
       $bre_post->title = get_the_title();
-      $bre_post->slug = basename($permalink);
+      $bre_post->slug = $post->post_name;
       $bre_post->permalink = $permalink;
       $bre_post->date = get_the_date('c');
       $bre_post->excerpt = get_the_excerpt();
@@ -82,6 +84,13 @@ function get_post_by_id( $data ) {
        *
        */
       $bre_post->acf = bre_get_acf();
+
+      /*
+       *
+       * return Yoast SEO fields if they exist
+       *
+       */
+      $bre_post->yoast = bre_get_yoast( $bre_post->id );
 
       /*
        *
