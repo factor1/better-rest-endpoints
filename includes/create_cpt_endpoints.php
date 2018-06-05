@@ -30,6 +30,8 @@ function bre_build_cpt_endpoints() {
             $show_content = filter_var($content, FILTER_VALIDATE_BOOLEAN);
             $acf = $request['acf'];
             $show_acf = filter_var($acf, FILTER_VALIDATE_BOOLEAN);
+            $yoast = $request['yoast'];
+            $show_yoast = filter_var($yoast, FILTER_VALIDATE_BOOLEAN);
             $media = $request['media'];
             $show_media = filter_var($media, FILTER_VALIDATE_BOOLEAN);
             $orderby = $request['orderby']?: null;
@@ -63,6 +65,8 @@ function bre_build_cpt_endpoints() {
             	while ( $query->have_posts() ) {
             		$query->the_post();
 
+                global $post;
+
                 // better wordpress endpoint post object
                 $bre_post = new stdClass();
 
@@ -70,7 +74,7 @@ function bre_build_cpt_endpoints() {
                 $permalink = get_permalink();
                 $bre_post->id = get_the_ID();
                 $bre_post->title = get_the_title();
-                $bre_post->slug = basename($permalink);
+                $bre_post->slug = $post->post_name;
                 $bre_post->permalink = $permalink;
                 $bre_post->date = get_the_date('c');
                 $bre_post->excerpt = get_the_excerpt();
@@ -105,6 +109,15 @@ function bre_build_cpt_endpoints() {
                  */
                 if( $acf === null || $show_acf === true ) {
                   $bre_post->acf = bre_get_acf();
+                }
+
+                /*
+                 *
+                 * return Yoast SEO fields if they exist and depending on query string
+                 *
+                 */
+                if( $yoast === null || $show_yoast === true ) {
+                  $bre_post->yoast = bre_get_yoast( $bre_post->id );
                 }
 
                 /*
@@ -180,6 +193,20 @@ function bre_build_cpt_endpoints() {
             ),
             'acf' =>  array(
               'description'       => 'Hide or show acf fields from the collection.',
+              'type'              => 'boolean',
+              'validate_callback' => function( $param, $request, $key ) {
+
+                if ( $param == 'true' || $param == 'TRUE' ) {
+                  $param = true;
+                } else if( $param == 'false' || $param == 'FALSE') {
+                  $param = false;
+                }
+
+                return is_bool( $param );
+               }
+            ),
+            'yoast' =>  array(
+              'description'       => 'Hide or show Yoast SEO fields from the collection.',
               'type'              => 'boolean',
               'validate_callback' => function( $param, $request, $key ) {
 

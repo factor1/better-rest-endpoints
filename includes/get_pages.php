@@ -17,6 +17,8 @@ function bre_get_pages( WP_REST_Request $request ) {
   $show_content = filter_var($content, FILTER_VALIDATE_BOOLEAN);
   $acf = $request['acf'];
   $show_acf = filter_var($acf, FILTER_VALIDATE_BOOLEAN);
+  $yoast = $request['yoast'];
+  $show_yoast = filter_var($yoast, FILTER_VALIDATE_BOOLEAN);
   $media = $request['media'];
   $show_media = filter_var($media, FILTER_VALIDATE_BOOLEAN);
   $orderby = $request['orderby']?: null;
@@ -62,7 +64,7 @@ function bre_get_pages( WP_REST_Request $request ) {
       $permalink = get_permalink();
       $bre_page->id = get_the_ID();
       $bre_page->title = get_the_title();
-      $bre_page->slug = basename($permalink);
+      $bre_page->slug = $post->post_name;
       $bre_page->permalink = $permalink;
 
       /*
@@ -105,6 +107,15 @@ function bre_get_pages( WP_REST_Request $request ) {
        */
        if( $acf === null || $show_acf === true ) {
          $bre_page->acf = bre_get_acf();
+       }
+
+      /*
+       *
+       * return Yoast SEO fields if they exist
+       *
+       */
+       if( $yoast === null || $show_yoast === true ) {
+         $bre_page->yoast = bre_get_yoast( $bre_page->id );
        }
 
        /*
@@ -217,6 +228,20 @@ function bre_get_pages( WP_REST_Request $request ) {
        ),
        'acf' =>  array(
          'description'       => 'Hide or show acf fields from the collection.',
+         'type'              => 'boolean',
+         'validate_callback' => function( $param, $request, $key ) {
+
+           if ( $param == 'true' || $param == 'TRUE' ) {
+             $param = true;
+           } else if( $param == 'false' || $param == 'FALSE') {
+             $param = false;
+           }
+
+           return is_bool( $param );
+          }
+       ),
+       'yoast' =>  array(
+         'description'       => 'Hide or show Yoast SEO fields from the collection.',
          'type'              => 'boolean',
          'validate_callback' => function( $param, $request, $key ) {
 

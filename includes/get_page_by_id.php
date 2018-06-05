@@ -29,7 +29,7 @@ function get_page_by_id( WP_REST_Request $request ){
       $permalink = get_permalink();
       $bre_page->id = get_the_ID();
       $bre_page->title = get_the_title();
-      $bre_page->slug = basename($permalink);
+      $bre_page->slug = $post->post_name;
       $bre_page->permalink = $permalink;
 
       /*
@@ -67,6 +67,13 @@ function get_page_by_id( WP_REST_Request $request ){
        *
        */
       $bre_page->acf = bre_get_acf();
+
+      /*
+       *
+       * return Yoast SEO fields if they exist
+       *
+       */
+      $bre_page->yoast = bre_get_yoast( $bre_page->id );
 
       /*
        *
