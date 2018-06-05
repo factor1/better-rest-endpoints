@@ -45,6 +45,8 @@ function bre_get_search( WP_REST_Request $request ) {
   	while ( $query->have_posts() ) {
   		$query->the_post();
 
+      global $post;
+
       // For Headers
       $total = $query->found_posts;
       $pages = $query->max_num_pages;
@@ -56,7 +58,7 @@ function bre_get_search( WP_REST_Request $request ) {
       $permalink = get_permalink();
       $bre_post->id = get_the_ID();
       $bre_post->title = get_the_title();
-      $bre_post->slug = basename($permalink);
+      $bre_post->slug = $post->post_name;
       $bre_post->permalink = $permalink;
       $bre_post->date = get_the_date('c');
       $bre_post->excerpt = get_the_excerpt();

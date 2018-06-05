@@ -65,6 +65,8 @@ function bre_build_cpt_endpoints() {
             	while ( $query->have_posts() ) {
             		$query->the_post();
 
+                global $post;
+
                 // better wordpress endpoint post object
                 $bre_post = new stdClass();
 
@@ -72,7 +74,7 @@ function bre_build_cpt_endpoints() {
                 $permalink = get_permalink();
                 $bre_post->id = get_the_ID();
                 $bre_post->title = get_the_title();
-                $bre_post->slug = basename($permalink);
+                $bre_post->slug = $post->post_name;
                 $bre_post->permalink = $permalink;
                 $bre_post->date = get_the_date('c');
                 $bre_post->excerpt = get_the_excerpt();

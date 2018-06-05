@@ -77,13 +77,15 @@ function bre_build_custom_tax_endpoint() {
                 while( $query->have_posts() ) {
                   $query->the_post();
 
+                  global $post;
+
                   $bre_tax_post = new stdClass();
 
                   // get post data
                   $permalink = get_permalink();
                   $bre_tax_post->id = get_the_ID();
                   $bre_tax_post->title = get_the_title();
-                  $bre_tax_post->slug = basename($permalink);
+                  $bre_tax_post->slug = $post->post_name;
                   $bre_tax_post->permalink = $permalink;
                   $bre_tax_post->date = get_the_date('c');
                   $bre_tax_post->excerpt = get_the_excerpt();

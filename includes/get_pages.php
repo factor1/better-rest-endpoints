@@ -64,7 +64,7 @@ function bre_get_pages( WP_REST_Request $request ) {
       $permalink = get_permalink();
       $bre_page->id = get_the_ID();
       $bre_page->title = get_the_title();
-      $bre_page->slug = basename($permalink);
+      $bre_page->slug = $post->post_name;
       $bre_page->permalink = $permalink;
 
       /*
