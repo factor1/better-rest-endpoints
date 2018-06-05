@@ -82,6 +82,13 @@ function bre_build_single_cpt_endpoints() {
 
                 /*
                  *
+                 * return Yoast SEO fields if they exist
+                 *
+                 */
+                $bre_cpt_post->yoast = bre_get_yoast( $bre_cpt_post->id );
+
+                /*
+                 *
                  * get possible thumbnail sizes and urls
                  *
                  */

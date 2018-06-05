@@ -19,6 +19,8 @@ function bre_get_posts( WP_REST_Request $request ) {
   $show_content = filter_var($content, FILTER_VALIDATE_BOOLEAN);
   $acf = $request['acf'];
   $show_acf = filter_var($acf, FILTER_VALIDATE_BOOLEAN);
+  $yoast = $request['yoast'];
+  $show_yoast = filter_var($yoast, FILTER_VALIDATE_BOOLEAN);
   $media = $request['media'];
   $show_media = filter_var($media, FILTER_VALIDATE_BOOLEAN);
   $orderby = $request['orderby']?: null;
@@ -124,6 +126,15 @@ function bre_get_posts( WP_REST_Request $request ) {
        */
       if( $acf === null || $show_acf === true ) {
         $bre_post->acf = bre_get_acf();
+      }
+
+      /*
+       *
+       * return Yoast SEO fields if they exist and depending on query string
+       *
+       */
+      if( $yoast === null || $show_yoast === true ) {
+        $bre_post->yoast = bre_get_yoast( $bre_post->id );
       }
 
       /*
@@ -234,6 +245,20 @@ add_action( 'rest_api_init', function () {
       ),
       'acf' =>  array(
         'description'       => 'Hide or show acf fields from the collection.',
+        'type'              => 'boolean',
+        'validate_callback' => function( $param, $request, $key ) {
+
+          if ( $param == 'true' || $param == 'TRUE' ) {
+            $param = true;
+          } else if( $param == 'false' || $param == 'FALSE') {
+            $param = false;
+          }
+
+          return is_bool( $param );
+         }
+      ),
+      'yoast' =>  array(
+        'description'       => 'Hide or show Yoast SEO fields from the collection.',
         'type'              => 'boolean',
         'validate_callback' => function( $param, $request, $key ) {
 

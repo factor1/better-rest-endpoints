@@ -70,6 +70,13 @@ function get_page_by_id( WP_REST_Request $request ){
 
       /*
        *
+       * return Yoast SEO fields if they exist
+       *
+       */
+      $bre_page->yoast = bre_get_yoast( $bre_page->id );
+
+      /*
+       *
        * get possible thumbnail sizes and urls
        *
        */

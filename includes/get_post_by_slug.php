@@ -87,6 +87,13 @@ function get_post_by_slug( WP_REST_Request $request ) {
 
       /*
        *
+       * return Yoast SEO fields if they exist
+       *
+       */
+      $bre_post->yoast = bre_get_yoast( $bre_post->id );
+
+      /*
+       *
        * get possible thumbnail sizes and urls
        *
        */

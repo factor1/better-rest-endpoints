@@ -85,6 +85,13 @@ function get_post_by_id( $data ) {
 
       /*
        *
+       * return Yoast SEO fields if they exist
+       *
+       */
+      $bre_post->yoast = bre_get_yoast( $bre_post->id );
+
+      /*
+       *
        * get possible thumbnail sizes and urls
        *
        */
