@@ -118,6 +118,9 @@ class F1_Better_Rest_Endpoints {
 
 		// get taxonomies endpoint
 		include_once self::$plugin_dir . 'includes/get_taxonomies.php';
+
+		// get acf option endpoint
+		include_once self::$plugin_dir . 'includes/get_options_acf.php';
 	}
 
 }

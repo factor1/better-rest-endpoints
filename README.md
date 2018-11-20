@@ -283,6 +283,17 @@ It returns a JSON response with the following (returns an empty array if no post
 - title
 - Yoast SEO fields, if applicable
 
+### ACF Options
+**`better-rest-endpoints/v1/options/acf`**
+Gets an array of all ACF Options Page fields, returns an empty array if none are found or if ACF is not active.
+
+**`better-rest-endpoints/v1/options/acf/{field}`**
+Gets a single ACF Options Page field, returns null if ACF is not active or the field does not exist.
+
+Accepts the following parameters:
+
+- field (string - can be either the field key or the field name)
+
 ## Hooks and Filters
 
 ### Filter the Custom Post Types endpoints
