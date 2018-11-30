@@ -88,6 +88,7 @@ function bre_build_custom_tax_endpoint() {
                   $bre_tax_post->slug = $post->post_name;
                   $bre_tax_post->permalink = $permalink;
                   $bre_tax_post->date = get_the_date('c');
+                  $bre_tax_post->date_modified = get_the_modified_date('c');
                   $bre_tax_post->excerpt = get_the_excerpt();
 
                   if( $content === null || $show_content === true ){
