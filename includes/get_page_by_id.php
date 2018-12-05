@@ -100,7 +100,7 @@ function get_page_by_id( WP_REST_Request $request ){
   } else {
 
     // return empty page array if no page
-    return $bre_page;
+    return [];
 
   }
 
