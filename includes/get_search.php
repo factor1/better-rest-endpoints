@@ -61,6 +61,7 @@ function bre_get_search( WP_REST_Request $request ) {
       $bre_post->slug = $post->post_name;
       $bre_post->permalink = $permalink;
       $bre_post->date = get_the_date('c');
+      $bre_post->date_modified = get_the_modified_date('c');
       $bre_post->excerpt = get_the_excerpt();
 
       // show post content unless parameter is false

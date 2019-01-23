@@ -92,6 +92,9 @@ class F1_Better_Rest_Endpoints {
     // get page by id
 		include_once self::$plugin_dir . 'includes/get_page_by_id.php';
 
+    	// get page by slug
+		include_once self::$plugin_dir . 'includes/get_page_by_slug.php';
+
     // get cpts
     include_once self::$plugin_dir . 'includes/get_cpts.php';
 
@@ -118,6 +121,9 @@ class F1_Better_Rest_Endpoints {
 
 		// get taxonomies endpoint
 		include_once self::$plugin_dir . 'includes/get_taxonomies.php';
+
+		// get acf option endpoint
+		include_once self::$plugin_dir . 'includes/get_options_acf.php';
 	}
 
 }
