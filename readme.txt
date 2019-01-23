@@ -6,7 +6,7 @@ Contributors: factor1, erwstout
 Tags: rest, api, endpoints, acf, json
 Requires at least: 4.7.1
 Tested up to: 4.9.4
-Stable Tag: 1.4.0
+Stable Tag: 1.4.1
 License: GNU Version 3 or Any Later Version
 
 A WordPress plugin that serves up slimmer WP Rest API endpoints.
@@ -42,7 +42,7 @@ apps endpoints to use Better Rest Endpoints.
 
 == Changelog ==
 
-= 1.4.0, January 23, 2019 =
+= 1.4.1, January 23, 2019 =
 * Add: Functionality to get a page by slug or path for hierarchical pages
 * Add: 'modified date' to all endpoints with 'date'
 * Add: Support for ACF options pages
