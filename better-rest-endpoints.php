@@ -107,8 +107,11 @@ class F1_Better_Rest_Endpoints {
 		// get custom post type by slug
 		include_once self::$plugin_dir . 'includes/get_cpt_by_slug.php';
 
-    // get custom post type by id
-		include_once self::$plugin_dir . 'includes/wp_nav_menus.php';
+    	// get menus by menu name
+		include_once self::$plugin_dir . 'includes/wp_nav_menus_by_name.php';
+
+    	// get menus by menu location
+		include_once self::$plugin_dir . 'includes/wp_nav_menus_by_location.php';
 
 		// get custom taxonomies
 		include_once self::$plugin_dir . 'includes/get_tax.php';
