@@ -251,11 +251,27 @@ Returns the following JSON Response:
 - title
 - Yoast SEO Fields, if applicable
 
-### Menus
+### Menus from slug (name)
 **`better-rest-endpoints/v1/menus/{menu-slug}`**
 Gets a WordPress Menu by slug. Accepts no parameters.
 
 Returns the following JSON Response in each item object:
+
+- classes (array)
+- description
+- ID
+- menu item parent
+- menu_order
+- slug
+- target
+- title
+- url
+
+### Menus from location (theme location)
+**`better-rest-endpoints/v1/menus/{menu-slug}`**
+Gets a WordPress Menu by the theme location. Accepts no parameters.
+
+Returns an empty array if the location can not be found or if it has no assigned menu. Returns an array of the following objects if a menu is assigned to the specified location:
 
 - classes (array)
 - description

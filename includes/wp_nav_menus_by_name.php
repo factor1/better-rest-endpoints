@@ -1,6 +1,6 @@
 <?php
 /**
- * Get WordPress Nav Menus
+ * Get WordPress Nav Menus By Name
  *
  * @param N/A
  * @return object|null Return wp_nav_menu object,  * or null if none.
