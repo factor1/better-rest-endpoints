@@ -6,7 +6,7 @@ Contributors: factor1, erwstout
 Tags: rest, api, endpoints, acf, json
 Requires at least: 4.7.1
 Tested up to: 4.9.4
-Stable Tag: 1.4.1
+Stable Tag: 1.5.0
 License: GNU Version 3 or Any Later Version
 
 A WordPress plugin that serves up slimmer WP Rest API endpoints.
