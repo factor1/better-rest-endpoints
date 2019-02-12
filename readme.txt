@@ -42,6 +42,9 @@ apps endpoints to use Better Rest Endpoints.
 
 == Changelog ==
 
+= 1.5.0, Febuary 11, 2019
+* Add: Functionality to get menus by location
+
 = 1.4.1, January 23, 2019 =
 * Add: Functionality to get a page by slug or path for hierarchical pages
 * Add: 'modified date' to all endpoints with 'date'
