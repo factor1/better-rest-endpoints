@@ -1,12 +1,12 @@
 
 === Better Rest Endpoints ===
-Author URI: https://factor1studios.com
+Author URI: https://ericwstout.com
 Plugin URI: https://github.com/factor1/better-rest-endpoints
 Contributors: erwstout
 Tags: rest, api, endpoints, acf, json
 Requires at least: 4.7.1
 Tested up to: 4.9.9
-Stable Tag: 1.5.1
+Stable Tag: 1.5.2
 License: GNU Version 3 or Any Later Version
 
 A WordPress plugin that serves up slimmer WP Rest API endpoints.
@@ -41,6 +41,9 @@ Just activating the plugin will do nothing - you need to build/adjust your theme
 apps endpoints to use Better Rest Endpoints.
 
 == Changelog ==
+
+= 1.5.2, Febuary 12, 2019
+* Update: Plugin version to fix SVN issue
 
 = 1.5.1, Febuary 12, 2019
 * Update: Plugin version to fix SVN issue
