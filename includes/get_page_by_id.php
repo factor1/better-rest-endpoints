@@ -48,6 +48,7 @@ function get_page_by_id( WP_REST_Request $request ){
       }
 
       $bre_page->content = apply_filters('the_content', get_the_content());
+      $bre_post->blocks = parse_blocks($post->post_content);
 
       /*
        *

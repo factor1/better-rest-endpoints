@@ -56,6 +56,7 @@ function bre_build_single_cpt_endpoints() {
                 $bre_cpt_post->date_modified = get_the_modified_date('c');
                 $bre_cpt_post->excerpt = get_the_excerpt();
                 $bre_cpt_post->content = apply_filters('the_content', get_the_content());
+                $bre_post->blocks = parse_blocks($post->post_content);
                 $bre_cpt_post->author = esc_html__(get_the_author(), 'text_domain');
                 $bre_cpt_post->author_id = get_the_author_meta('ID');
                 $bre_cpt_post->author_nicename = get_the_author_meta('user_nicename');
