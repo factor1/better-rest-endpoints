@@ -84,7 +84,7 @@ function get_post_by_id( $data ) {
        * return acf fields if they exist
        *
        */
-      $bre_post->acf = bre_get_acf();
+      $bre_post->acf = bre_get_acf( $bre_post->id );
 
       /*
        *

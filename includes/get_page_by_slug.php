@@ -98,7 +98,7 @@ function get_page_by_slug( WP_REST_Request $request ){
          * return acf fields if they exist
          *
          */
-        $bre_post->acf = bre_get_acf();
+        $bre_post->acf = bre_get_acf( $bre_post->id );
 
         /*
          *
