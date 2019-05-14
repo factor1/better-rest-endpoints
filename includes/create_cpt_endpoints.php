@@ -96,8 +96,12 @@ function bre_build_cpt_endpoints() {
                  */
                 if( get_object_taxonomies($cpt) ){
                   $cpt_taxonomies = get_object_taxonomies($cpt, 'names');
+                  $terms = array();
 
-                  $bre_post->terms = get_the_terms(get_the_ID(), $cpt_taxonomies);
+                  foreach ( $cpt_taxonomies as $cpt_taxonomy ) {
+                    $terms[] = get_the_terms(get_the_ID(), $cpt_taxonomy);
+                  }
+                  $bre_post->terms = $terms;
 
                 } else {
                   $bre_post->terms = array();
