@@ -94,17 +94,16 @@ function bre_build_cpt_endpoints() {
                  * get the terms
                  *
                  */
+                $bre_post->terms = array();
                 if( get_object_taxonomies($cpt) ){
                   $cpt_taxonomies = get_object_taxonomies($cpt, 'names');
-                  $terms = array();
 
                   foreach ( $cpt_taxonomies as $cpt_taxonomy ) {
-                    $terms[] = get_the_terms(get_the_ID(), $cpt_taxonomy);
+                    $these_terms = get_the_terms(get_the_ID(), $cpt_taxonomy);
+                    if (false !== $these_terms) {
+                      $bre_post->terms = array_merge($bre_post->terms, $these_terms);
+                    }
                   }
-                  $bre_post->terms = $terms;
-
-                } else {
-                  $bre_post->terms = array();
                 }
 
                 /*
