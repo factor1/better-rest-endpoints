@@ -7,15 +7,15 @@
  * @since 0.0.1
  */
 
-function bre_get_acf() {
-  
+function bre_get_acf($post_id) {
+
   include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 
   // check if acf is active before doing anything
    if( is_plugin_active('advanced-custom-fields-pro/acf.php') || is_plugin_active('advanced-custom-fields/acf.php') ) {
 
      // get fields
-     $acf_fields = get_fields();
+     $acf_fields = get_fields($post_id);
 
      // if we have fields
      if( $acf_fields ) {
