@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Get a collection of posts by search term.
  *
@@ -8,16 +7,13 @@
  * @since 0.0.1
  */
 
-function bre_get_search(WP_REST_Request $request)
-{
+function bre_get_search( WP_REST_Request $request ) {
 
   // check for params
-  $posts_per_page = $request['per_page'] ?: '10';
-  $page = $request['page'] ?: '1';
-  $category = $request['category'] ?: null;
-  $tag = $request['tag'] ?: null;
-  $exclude_category = $request['exclude_category'] ? explode(",", rawurldecode($request['exclude_category'])) : null;
-  $exclude_tag = $request['exclude_tag'] ? explode(",", rawurldecode($request['exclude_tag'])) : null;
+  $posts_per_page = $request['per_page']?: '10';
+  $page = $request['page']?: '1';
+  $category = $request['category']?: null;
+  $tag = $request['tag']?: null;
   $content = $request['content'];
   $show_content = filter_var($content, FILTER_VALIDATE_BOOLEAN);
   $acf = $request['acf'];
@@ -26,12 +22,14 @@ function bre_get_search(WP_REST_Request $request)
   $show_yoast = filter_var($yoast, FILTER_VALIDATE_BOOLEAN);
   $media = $request['media'];
   $show_media = filter_var($media, FILTER_VALIDATE_BOOLEAN);
-  $search = $request['search'] ?: null;
+  $search = $request['search']?: null;
+  $exclude_category = $request['exclude_category'] ? explode(",", rawurldecode($request['exclude_category'])) : null;
+  $exclude_tag = $request['exclude_tag'] ? explode(",", rawurldecode($request['exclude_tag'])) : null;
 
   // WP_Query arguments
   $args = array(
-    'nopaging'               => false,
-    'posts_per_page'         => $posts_per_page,
+  	'nopaging'               => false,
+  	'posts_per_page'         => $posts_per_page,
     'paged'                  => $page,
     'cat'                    => $category,
     'tag_id'                 => $tag,
@@ -41,15 +39,15 @@ function bre_get_search(WP_REST_Request $request)
   );
 
   // The Query
-  $query = new WP_Query($args);
+  $query = new WP_Query( $args );
 
   // Setup Posts Array
   $posts = array();
 
   // The Loop
-  if ($query->have_posts()) {
-    while ($query->have_posts()) {
-      $query->the_post();
+  if ( $query->have_posts() ) {
+  	while ( $query->have_posts() ) {
+  		$query->the_post();
 
       global $post;
 
@@ -71,7 +69,7 @@ function bre_get_search(WP_REST_Request $request)
       $bre_post->excerpt = get_the_excerpt();
 
       // show post content unless parameter is false
-      if ($content === null || $show_content === true) {
+      if( $content === null || $show_content === true ) {
         $bre_post->content = apply_filters('the_content', get_the_content());
       }
 
@@ -89,7 +87,7 @@ function bre_get_search(WP_REST_Request $request)
       $bre_categories = [];
       $bre_category_ids = [];
 
-      if (!empty($categories)) {
+      if( !empty($categories) ){
         foreach ($categories as $key => $category) {
           array_push($bre_category_ids, $category->term_id);
           array_push($bre_categories, $category->cat_name);
@@ -109,7 +107,7 @@ function bre_get_search(WP_REST_Request $request)
       $bre_tags = [];
       $bre_tag_ids = [];
 
-      if (!empty($tags)) {
+      if( !empty($tags) ){
         foreach ($tags as $key => $tag) {
           array_push($bre_tag_ids, $tag->term_id);
           array_push($bre_tags, $tag->name);
@@ -125,7 +123,7 @@ function bre_get_search(WP_REST_Request $request)
        * return acf fields if they exist and depending on query string
        *
        */
-      if ($acf === null || $show_acf === true) {
+      if( $acf === null || $show_acf === true ) {
         $bre_post->acf = bre_get_acf();
       }
 
@@ -134,8 +132,8 @@ function bre_get_search(WP_REST_Request $request)
        * return Yoast SEO fields if they exist and depending on query string
        *
        */
-      if ($yoast === null || $show_yoast === true) {
-        $bre_post->yoast = bre_get_yoast($bre_post->id);
+      if( $yoast === null || $show_yoast === true ) {
+        $bre_post->yoast = bre_get_yoast( $bre_post->id );
       }
 
       /*
@@ -144,11 +142,11 @@ function bre_get_search(WP_REST_Request $request)
        *
        */
 
-      if ($media === null || $show_media === true) {
+      if( $media === null || $show_media === true ) {
         $thumbnail_names = get_intermediate_image_sizes();
         $bre_thumbnails = new stdClass();
 
-        if (has_post_thumbnail()) {
+        if( has_post_thumbnail() ){
           foreach ($thumbnail_names as $key => $name) {
             $bre_thumbnails->$name = esc_url(get_the_post_thumbnail_url($post->ID, $name));
           }
@@ -161,16 +159,17 @@ function bre_get_search(WP_REST_Request $request)
 
       // Push the post to the main $post array
       array_push($posts, $bre_post);
-    }
+  	}
 
     // return the post array
-    $response = rest_ensure_response($posts);
-    $response->header('X-WP-Total', (int) $total);
-    $response->header('X-WP-TotalPages', (int) $pages);
+    $response = rest_ensure_response( $posts );
+    $response->header( 'X-WP-Total', (int) $total );
+    $response->header( 'X-WP-TotalPages', (int) $pages );
     return $response;
+
   } else {
     // return empty posts array if no posts
-    return $posts;
+  	return $posts;
   }
 
   // Restore original Post Data
@@ -182,108 +181,108 @@ function bre_get_search(WP_REST_Request $request)
  * Register Rest API Endpoint
  *
  */
-add_action('rest_api_init', function () {
-  register_rest_route('better-rest-endpoints/v1', '/search/', array(
+add_action( 'rest_api_init', function () {
+  register_rest_route( 'better-rest-endpoints/v1', '/search/', array(
     'methods' => 'GET',
     'callback' => 'bre_get_search',
     'args' => array(
       'per_page' => array(
         'description'       => 'Maxiumum number of items to show per page.',
         'type'              => 'integer',
-        'validate_callback' => function ($param, $request, $key) {
-          return is_numeric($param);
-        },
+        'validate_callback' => function( $param, $request, $key ) {
+          return is_numeric( $param );
+         },
         'sanitize_callback' => 'absint',
       ),
       'page' =>  array(
         'description'       => 'Current page of the collection.',
         'type'              => 'integer',
-        'validate_callback' => function ($param, $request, $key) {
-          return is_numeric($param);
-        },
+        'validate_callback' => function( $param, $request, $key ) {
+          return is_numeric( $param );
+         },
         'sanitize_callback' => 'absint'
       ),
       'category' =>  array(
         'description'       => 'Get a category from the collection.',
         'type'              => 'integer',
-        'validate_callback' => function ($param, $request, $key) {
-          return is_numeric($param);
-        },
+        'validate_callback' => function( $param, $request, $key ) {
+          return is_numeric( $param );
+         },
         'sanitize_callback' => 'absint'
       ),
       'tag' =>  array(
         'description'       => 'Get a tag from the collection.',
         'type'              => 'integer',
-        'validate_callback' => function ($param, $request, $key) {
-          return is_numeric($param);
-        },
+        'validate_callback' => function( $param, $request, $key ) {
+          return is_numeric( $param );
+         },
         'sanitize_callback' => 'absint'
       ),
       'content' =>  array(
         'description'       => 'Hide or show the_content from the collection.',
         'type'              => 'boolean',
-        'validate_callback' => function ($param, $request, $key) {
+        'validate_callback' => function( $param, $request, $key ) {
 
-          if ($param == 'true' || $param == 'TRUE') {
+          if ( $param == 'true' || $param == 'TRUE' ) {
             $param = true;
-          } else if ($param == 'false' || $param == 'FALSE') {
+          } else if( $param == 'false' || $param == 'FALSE') {
             $param = false;
           }
 
-          return is_bool($param);
-        }
+          return is_bool( $param );
+         }
       ),
       'acf' =>  array(
         'description'       => 'Hide or show acf fields from the collection.',
         'type'              => 'boolean',
-        'validate_callback' => function ($param, $request, $key) {
+        'validate_callback' => function( $param, $request, $key ) {
 
-          if ($param == 'true' || $param == 'TRUE') {
+          if ( $param == 'true' || $param == 'TRUE' ) {
             $param = true;
-          } else if ($param == 'false' || $param == 'FALSE') {
+          } else if( $param == 'false' || $param == 'FALSE') {
             $param = false;
           }
 
-          return is_bool($param);
-        }
+          return is_bool( $param );
+         }
       ),
       'yoast' =>  array(
         'description'       => 'Hide or show Yoast SEO fields from the collection.',
         'type'              => 'boolean',
-        'validate_callback' => function ($param, $request, $key) {
+        'validate_callback' => function( $param, $request, $key ) {
 
-          if ($param == 'true' || $param == 'TRUE') {
+          if ( $param == 'true' || $param == 'TRUE' ) {
             $param = true;
-          } else if ($param == 'false' || $param == 'FALSE') {
+          } else if( $param == 'false' || $param == 'FALSE') {
             $param = false;
           }
 
-          return is_bool($param);
-        }
+          return is_bool( $param );
+         }
       ),
       'media' =>  array(
         'description'       => 'Hide or show featured media from the collection.',
         'type'              => 'boolean',
-        'validate_callback' => function ($param, $request, $key) {
+        'validate_callback' => function( $param, $request, $key ) {
 
-          if ($param == 'true' || $param == 'TRUE') {
+          if ( $param == 'true' || $param == 'TRUE' ) {
             $param = true;
-          } else if ($param == 'false' || $param == 'FALSE') {
+          } else if( $param == 'false' || $param == 'FALSE') {
             $param = false;
           }
 
-          return is_bool($param);
-        }
+          return is_bool( $param );
+         }
       ),
       'search' =>  array(
         'description'       => 'The search term used to fetch the collection.',
         'type'              => 'string',
         'required'          => true,
-        'validate_callback' => function ($param, $request, $key) {
-          return is_string($param);
-        },
+        'validate_callback' => function($param, $request, $key) {
+            return is_string( $param );
+          },
         'sanitize_callback' => 'sanitize_text_field'
       ),
     ),
-  ));
-});
+  ) );
+} );
