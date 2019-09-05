@@ -23,8 +23,8 @@ function bre_get_search( WP_REST_Request $request ) {
   $media = $request['media'];
   $show_media = filter_var($media, FILTER_VALIDATE_BOOLEAN);
   $search = $request['search']?: null;
-  $exclude_category = $request['exclude_category'] ? explode(",", rawurldecode($request['exclude_category'])) : null;
-  $exclude_tag = $request['exclude_tag'] ? explode(",", rawurldecode($request['exclude_tag'])) : null;
+  $exclude_categories = $request['exclude_categories'] ? explode(",", rawurldecode($request['exclude_categories'])) : null;
+  $exclude_tags = $request['exclude_tags'] ? explode(",", rawurldecode($request['exclude_tags'])) : null;
 
   // WP_Query arguments
   $args = array(
@@ -33,8 +33,8 @@ function bre_get_search( WP_REST_Request $request ) {
     'paged'                  => $page,
     'cat'                    => $category,
     'tag_id'                 => $tag,
-    'category__not_in'       => $exclude_category,
-    'tag__not_in'            => $exclude_tag,
+    'category__not_in'       => $exclude_categories,
+    'tag__not_in'            => $exclude_tags,
     's'                      => $search
   );
 
