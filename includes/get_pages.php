@@ -106,7 +106,7 @@ function bre_get_pages( WP_REST_Request $request ) {
        *
        */
        if( $acf === null || $show_acf === true ) {
-         $bre_page->acf = bre_get_acf();
+         $bre_page->acf = bre_get_acf( $bre_page->id );
        }
 
       /*

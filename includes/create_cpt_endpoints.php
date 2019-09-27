@@ -109,7 +109,7 @@ function bre_build_cpt_endpoints() {
                  *
                  */
                 if( $acf === null || $show_acf === true ) {
-                  $bre_post->acf = bre_get_acf();
+                  $bre_post->acf = bre_get_acf($bre_post->id);
                 }
 
                 /*

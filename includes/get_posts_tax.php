@@ -119,7 +119,7 @@ function bre_build_custom_tax_endpoint() {
                    *
                    */
                    if( $acf === null || $show_acf === true ) {
-                     $bre_tax_post->acf = bre_get_acf();
+                     $bre_tax_post->acf = bre_get_acf( $bre_tax_post->id );
                    }
 
                   /*

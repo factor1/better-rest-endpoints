@@ -80,7 +80,7 @@ function bre_build_single_cpt_endpoints() {
                  * return acf fields if they exist
                  *
                  */
-                $bre_cpt_post->acf = bre_get_acf();
+                $bre_cpt_post->acf = bre_get_acf( $bre_cpt_post->id );
 
                 /*
                  *

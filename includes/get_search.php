@@ -124,7 +124,7 @@ function bre_get_search( WP_REST_Request $request ) {
        *
        */
       if( $acf === null || $show_acf === true ) {
-        $bre_post->acf = bre_get_acf();
+        $bre_post->acf = bre_get_acf( $bre_post->id );
       }
 
       /*
