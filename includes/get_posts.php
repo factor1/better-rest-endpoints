@@ -26,6 +26,8 @@ function bre_get_posts( WP_REST_Request $request ) {
   $orderby = $request['orderby']?: null;
   $order = $request['order']?: null;
   $exclude = $request['exclude']?: null;
+  $exclude_categories = $request['exclude_categories'] ? explode(",", rawurldecode($request['exclude_categories'])) : null;
+  $exclude_tags = $request['exclude_tags'] ? explode(",", rawurldecode($request['exclude_tags'])) : null;
   $author = $request['author']?: '';
 
   // WP_Query arguments
@@ -39,6 +41,8 @@ function bre_get_posts( WP_REST_Request $request ) {
     'order'                  => $order?:'DESC',
     'orderby'                => $orderby?:'date',
     'post__not_in'           => array($exclude),
+    'category__not_in'       => $exclude_categories,
+    'tag__not_in'            => $exclude_tags,
     'author_name'            => $author
   );
 

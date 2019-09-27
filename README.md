@@ -11,6 +11,7 @@ Gets a collection of posts. Accepts the following parameters:
 - author (string) limit posts by author nice name (user_nicename)
 - category id (int)
 - category_name (string)
+- exclude_categories (string) comma-separated array of category IDs
 - content (boolean) set to false to omit content from showing in JSON response
 - exclude (int) a post ID to exclude from the response
 - media (boolean - setting to false omits `media` (featured media) from being returned)
@@ -19,6 +20,7 @@ Gets a collection of posts. Accepts the following parameters:
 - page (int)
 - per_page (int)
 - tag id  (int)
+- exclude_tags (string) comma-separated array of tag IDs
 - yoast (boolean - setting to false omits `yoast` from being returned)
 
 It returns a JSON response with the following:
@@ -306,6 +308,8 @@ Gets a collection of posts and pages based on the search parameter. Accepts the 
 - per_page (int)
 - search (string | required)
 - tag id  (int)
+- exclude_tags (string) comma-separated array of tag IDs
+- exclude_categories (string) comma-separated array of category IDs
 - yoast (boolean - setting to false omits `yoast` from being returned)
 
 It returns a JSON response with the following (returns an empty array if no posts found):
