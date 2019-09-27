@@ -37,6 +37,7 @@ function get_post_by_slug( WP_REST_Request $request ) {
       $bre_post->date_modified = get_the_modified_date('c');
       $bre_post->excerpt = get_the_excerpt();
       $bre_post->content = apply_filters('the_content', get_the_content());
+      $bre_post->blocks = parse_blocks($post->post_content);
       $bre_post->author = esc_html__(get_the_author(), 'text_domain');
       $bre_post->author_id = get_the_author_meta('ID');
       $bre_post->author_nicename = get_the_author_meta('user_nicename');

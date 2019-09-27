@@ -83,6 +83,9 @@ function bre_build_cpt_endpoints() {
                 // show post content unless parameter is false
                 if( $content === null || $show_content === true ) {
                   $bre_post->content = apply_filters('the_content', get_the_content());
+                  
+                  // get guten blocks and parse into array format
+                  $bre_post->blocks = parse_blocks($post->post_content);
                 }
 
                 $bre_post->author = esc_html__(get_the_author(), 'text_domain');
