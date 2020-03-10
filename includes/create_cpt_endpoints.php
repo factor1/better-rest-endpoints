@@ -37,6 +37,9 @@ function bre_build_cpt_endpoints() {
             $orderby = $request['orderby']?: null;
             $order = $request['order']?: null;
             $exclude = $request['exclude']?: null;
+            $meta_key = $request['meta_key']?: null;
+            $meta_value = $request['meta_value']?: null;
+            $meta_compare = $request['meta_compare']?: null;
 
             // WP_Query arguments
             $args = array(
@@ -46,7 +49,14 @@ function bre_build_cpt_endpoints() {
               'paged'                  => $page,
               'post__not_in'           => array($exclude),
               'order'                  => $order?:'DESC',
-              'orderby'                => $orderby?:'date'
+              'orderby'                => $orderby?:'date',
+              'meta_query'             => array(
+                array(
+                  'key' => $meta_key,
+                  'value' => $meta_value,
+                  'compare' => $meta_compare
+                )
+              )
             );
 
             // The Query
@@ -243,6 +253,30 @@ function bre_build_cpt_endpoints() {
                 return is_numeric( $param );
                },
               'sanitize_callback' => 'absint'
+            ),
+            'meta_key' => array(
+              'description'       => 'Query the collection by meta_key.',
+              'type'              => 'string',
+              'validate_callback' => function($param, $request, $key) {
+                  return is_string( $param );
+                },
+              'sanitize_callback' => 'sanitize_text_field',
+            ),
+            'meta_value' => array(
+              'description'       => 'Query the collection by meta_value.',
+              'type'              => 'string',
+              'validate_callback' => function($param, $request, $key) {
+                  return is_string( $param );
+                },
+              'sanitize_callback' => 'sanitize_text_field',
+            ),
+            'meta_compare' => array(
+              'description'       => 'Set the meta comparison for querying the collection by meta value.',
+              'type'              => 'string',
+              'validate_callback' => function($param, $request, $key) {
+                  return is_string( $param );
+                },
+              'sanitize_callback' => 'sanitize_text_field',
             ),
           ),
         ) );
