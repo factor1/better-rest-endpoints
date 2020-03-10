@@ -20,6 +20,9 @@ Gets a collection of posts. Accepts the following parameters:
 - per_page (int)
 - tag id  (int)
 - yoast (boolean - setting to false omits `yoast` from being returned)
+- meta_key (string)
+- meta_value (string)
+- meta_compare (string)
 
 It returns a JSON response with the following:
 - ACF fields, if applicable
@@ -169,6 +172,9 @@ Gets a collection of posts from a custom post type. Accepts the following parame
 - page (int)
 - per_page (int)
 - yoast (boolean - setting to false omits `yoast` from being returned)
+- meta_key (string)
+- meta_value (string)
+- meta_compare (string)
 
 Returns the following JSON response:
 

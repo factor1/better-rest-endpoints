@@ -27,6 +27,9 @@ function bre_get_posts( WP_REST_Request $request ) {
   $order = $request['order']?: null;
   $exclude = $request['exclude']?: null;
   $author = $request['author']?: '';
+  $meta_key = $request['meta_key']?: null;
+  $meta_value = $request['meta_value']?: null;
+  $meta_compare = $request['meta_compare']?: null;
 
   // WP_Query arguments
   $args = array(
@@ -39,7 +42,14 @@ function bre_get_posts( WP_REST_Request $request ) {
     'order'                  => $order?:'DESC',
     'orderby'                => $orderby?:'date',
     'post__not_in'           => array($exclude),
-    'author_name'            => $author
+    'author_name'            => $author,
+    'meta_query'             => array(
+      array(
+        'key' => $meta_key,
+        'value' => $meta_value,
+        'compare' => $meta_compare
+      )
+    )
   );
 
   // The Query
@@ -314,6 +324,30 @@ add_action( 'rest_api_init', function () {
       ),
       'category_name' =>  array(
         'description'       => 'Query the collection by category slug.',
+        'type'              => 'string',
+        'validate_callback' => function($param, $request, $key) {
+            return is_string( $param );
+          },
+        'sanitize_callback' => 'sanitize_text_field',
+      ),
+      'meta_key' => array(
+        'description'       => 'Query the collection by meta_key.',
+        'type'              => 'string',
+        'validate_callback' => function($param, $request, $key) {
+            return is_string( $param );
+          },
+        'sanitize_callback' => 'sanitize_text_field',
+      ),
+      'meta_value' => array(
+        'description'       => 'Query the collection by meta_value.',
+        'type'              => 'string',
+        'validate_callback' => function($param, $request, $key) {
+            return is_string( $param );
+          },
+        'sanitize_callback' => 'sanitize_text_field',
+      ),
+      'meta_compare' => array(
+        'description'       => 'Set the meta comparison for querying the collection by meta value.',
         'type'              => 'string',
         'validate_callback' => function($param, $request, $key) {
             return is_string( $param );
